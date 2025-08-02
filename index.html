@@ -11,6 +11,12 @@
 
     <!--==================== SWIPER CSS ====================-->
     <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+     <linkrel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Salsa&display=swap" rel="stylesheet" />
+
+
 
     <!--==================== CSS ====================-->
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -63,6 +69,11 @@
                             <i class="uil uil-scenery nav__icon"></i> Project
                         </a>
                     </li>
+                        <li class="nav__items">
+                        <a href="#experience" class="nav__link ">
+                            <i class="uil uil-scenery nav__icon"></i> Experience
+                        </a>
+                    </li>
 
             
                 </ul>
@@ -80,105 +91,117 @@
         </nav>
     </header>
 
-    <!--==================== MAIN ====================-->
     <main class="main">
-    <!--==================== HOME ====================-->
         <section class="home section" id="home">
             <div data-aos="fade-left" class="home__container container grid">
                 <div class="home__content grid">
                     <div class="home__social">
                         <a href="https://www.facebook.com/nel.parole.5" target="_blank" class="home__social-icon">
-                            <i class="uil uil-facebook-f"></i>
-                        </a>
+        <i class="uil uil-facebook-f"></i>
+    </a>
+
+
                         <a href="https://www.linkedin.com/in/cornelio-f-parole-lll-83a350248/" target="_blank" class="home__social-icon">
                         <i class="uil uil-linkedin-alt"></i>
-                        </a>
+
+                        
+        </a>
+
+                        
                     </div>
 
-                    <div class="blob-wrapper">
-                      <svg viewBox="0 0 200 200" class="home__blob" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <mask id="mask0" mask-type="alpha">
-                            <circle cx="100" cy="100" r="80" fill="white" />
-                          </mask>
-                          <clipPath id="clipCircle">
-                            <circle cx="100" cy="100" r="80" />
-                          </clipPath>
-                        </defs>
-                        <circle cx="100" cy="100" r="90" class="glow" />
-                        <g mask="url(#mask0)">
-                          <rect width="200" height="200" fill="#0b0f2f" />
-                          <image
-                            x="20"
-                            y="20"
-                            width="160"
-                            height="160"
-                            href="assets/img/me.png"
-                            clip-path="url(#clipCircle)"
-                            preserveAspectRatio="xMidYMid slice"
-                          />
-                        </g>
-                      </svg>
-                    </div>
-                    
-                    
-                    
+            <div class="blob-wrapper">
+            <svg viewBox="0 0 200 200" class="home__blob" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                <mask id="mask0" mask-type="alpha">
+                    <circle cx="100" cy="100" r="80" fill="white" />
+                </mask>
+                <clipPath id="clipCircle">
+                    <circle cx="100" cy="100" r="80" />
+                </clipPath>
+                </defs>
+
+                <circle cx="100" cy="100" r="90" class="glow" />
+
+                <g mask="url(#mask0)">
+                <rect width="200" height="200" fill="#0b0f2f" />
+                <image
+                    x="20"
+                    y="20"
+                    width="160"
+                    height="160"
+                    href="assets/img/me.png"
+                    clip-path="url(#clipCircle)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+                </g>
+            </svg>
+            </div>
+
+
+
                     <div class="home__data">
                         <h1 class="home_title">Hi!<span class="wave">👋</span>, I'm Cornelio</h1>
                         <h3 class="home__subtitle">
                             and I'm <span class="auto-input"></span>
                         </h3>
                         <p class="home__description">
-                            High-level experience in data engineering and ETL development, specializing in SQL and Power BI, delivering reliable and optimized data solutions. Also passionate about web development as a hobby.
+                           High-level experience in data engineering and ETL development, specializing in SQL and Power BI, delivering reliable and optimized data solutions. Also passionate about web development as a hobby.
                         </p>
-                        <a href="assets/pdf/Cornelio_Parole_CV.pdf" download class="button button--flex">
-                      Download CV <i class="uil uil-download-alt button__icon"></i>
-                    </a> 
+
+                        <a href="assets/pdf/Cornelio_Parole_III_CV.pdf" download class="button button--flex">
+                        Download CV <i class="uil uil-download-alt button__icon"></i>
+                        </a>
+
+
+
+                        
                     </div>
                 </div>
+
+          
             </div>
         </section>
 
-    <!--==================== ABOUT ====================-->
+        <!--==================== ABOUT ====================-->
        <section class="about section" id="about">
-          <h2 class="section__title">About Me</h2>
-          <span class="section__subtitle"> </span>
-          <div data-aos="fade-left" class="about__container container grid">
+        <h2 class="section__title">About Me</h2>
+        <span class="section__subtitle"> </span>
+
+        <div data-aos="fade-left" class="about__container container grid">
             <!-- Removed the image tag here -->
+
             <div class="about__data">
-              <p class="about__description">
+            <p class="about__description">
                 Hi, I’m Cornelio Parole III. I have nearly 2 years of experience working as an ETL Developer and Data Engineer. In my free time, I enjoy exploring new technologies, improving my skills in SQL, Power BI, and Azure Data Factory, and doing some web development projects as a hobby. I’m passionate about turning data into insights and building efficient data solution
-              </p>
-        
-              <div class="about_info">
+            </p>
+
+            <div class="about_info">
                 <div>
-                  <span class="about__info-title">02</span>
-                  <span class="about__info-name">Years <br />
-                 
+                <span class="about__info-title">02</span>
+                <span class="about__info-name">Years <br />
+                
                 </div>
                 <div>
-                  <span class="about__info-title">24/7</span>
-                  <span class="about__info-name">Looking for Job<br />
+                <span class="about__info-title">24/7</span>
+                <span class="about__info-name">Looking for Job<br />
                 </span>
                 </div>
-              </div>
-        
-              <!-- <div class="about__buttons">
-                <a download="" href="assets/pdf/mrinmoy-cv.pdf" class="button button--flex">
-                  Download CV <i class="uil uil-download-alt button__icon"></i>
-                </a>
-              </div>-->
             </div>
-          </div>
+
+            </div>
+        </div>
         </section>
 
-    <!--==================== SKILLS ====================-->
+        <!--==================== SKILLS ====================-->
         <section class="skills section" id="skills">
             <h2 class="section__title" style="color:black">Skills</h2>
             <span class="section__subtitle">My technical level</span>
 
             <div data-aos="fade-up" class="skills__container container grid">
-                <div>    
+                <div>
+
+                    
                     <!--==================== SKILL 1 ====================-->
                     <div class="skills__content skills__close">
                         <div class="skills__header">
@@ -245,223 +268,384 @@
                     <!-- Data Engineering & ETL -->
 <!-- Data Analysis -->
 
-                
-                <!-- Databases & Querying -->
-                <div class="skills__content skills__close">
-                    <div class="skills__header">
-                        <i class="uil uil-server skills__icon"></i>
-                        <div>
-                            <h1 class="skills__titles">Databases & Querying</h1>
-                            <span class="skills__subtitle">SQL Server, MySQL, Oracle</span>
-                        </div>
-                        <i class="uil uil-angle-down skills__arrow"></i>
-                    </div>
-                    <div class="skills__list grid">
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">T-SQL, PL/SQL, Stored Procedures</h3><span class="skills__number">85%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Views, Joins, Indexing, CTEs</h3><span class="skills__number">80%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Data Modeling: Star Schema, ERD</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                    </div>
+
+<!-- Databases & Querying -->
+<div class="skills__content skills__close">
+    <div class="skills__header">
+        <i class="uil uil-server skills__icon"></i>
+        <div>
+            <h1 class="skills__titles">Databases & Querying</h1>
+            <span class="skills__subtitle">SQL Server, MySQL, Oracle</span>
+        </div>
+        <i class="uil uil-angle-down skills__arrow"></i>
+    </div>
+    <div class="skills__list grid">
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">T-SQL, PL/SQL, Stored Procedures</h3><span class="skills__number">85%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Views, Joins, Indexing, CTEs</h3><span class="skills__number">80%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Data Modeling: Star Schema, ERD</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+    </div>
+</div>
+
+<!-- Business Intelligence & Reporting -->
+<div class="skills__content skills__close">
+    <div class="skills__header">
+        <i class="uil uil-chart-bar skills__icon"></i>
+        <div>
+            <h1 class="skills__titles">Business Intelligence & Reporting</h1>
+            <span class="skills__subtitle">Power BI, SSRS, SSAS</span>
+        </div>
+        <i class="uil uil-angle-down skills__arrow"></i>
+    </div>
+    <div class="skills__list grid">
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Power BI (DAX, Power Query)</h3><span class="skills__number">80%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <!--<div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SSRS (Paginated Reports)</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SSAS (Tabular & Multidimensional)</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+    --><div class="skills__data"><div class="skills__titles"><h3 class="skills__name">KPI Dashboards & Custom Visuals</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+    </div>
+</div>
+
+<!-- Cloud, DevOps & Tools -->
+<div class="skills__content skills__close">
+    <div class="skills__header">
+        <i class="uil uil-cloud skills__icon"></i>
+        <div>
+            <h1 class="skills__titles">Cloud, DevOps & Tools</h1>
+            <span class="skills__subtitle">Azure & CI/CD Tools</span>
+        </div>
+        <i class="uil uil-angle-down skills__arrow"></i>
+    </div>
+    <div class="skills__list grid">
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Azure SQL, Blob Storage, Monitor</h3><span class="skills__number">65%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Azure DevOps, CI/CD Pipelines</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Git, SSMS, VS Code</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">ServiceNow</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+    </div>
+</div>
+
+<!-- Programming & Web Development -->
+<div class="skills__content skills__close">
+    <div class="skills__header">
+        <i class="uil uil-brackets-curly skills__icon"></i>
+        <div>
+            <h1 class="skills__titles">Programming & Web Development</h1>
+            <span class="skills__subtitle">Basic to Intermediate</span>
+        </div>
+        <i class="uil uil-angle-down skills__arrow"></i>
+    </div>
+    <div class="skills__list grid">
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SQL, C#, JavaScript, PHP, Java, C++, VB</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">HTML5, CSS3, Bootstrap, jQuery</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">ASP.NET MVC, REST APIs</h3><span class="skills__number">65%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
+    </div>
+</div>
+
+
+
                 </div>
-                
-                <!-- Business Intelligence & Reporting -->
-                <div class="skills__content skills__close">
-                    <div class="skills__header">
-                        <i class="uil uil-chart-bar skills__icon"></i>
-                        <div>
-                            <h1 class="skills__titles">Business Intelligence & Reporting</h1>
-                            <span class="skills__subtitle">Power BI, SSRS, SSAS</span>
-                        </div>
-                        <i class="uil uil-angle-down skills__arrow"></i>
-                    </div>
-                    <div class="skills__list grid">
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Power BI (DAX, Power Query)</h3><span class="skills__number">80%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <!--<div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SSRS (Paginated Reports)</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SSAS (Tabular & Multidimensional)</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                    --><div class="skills__data"><div class="skills__titles"><h3 class="skills__name">KPI Dashboards & Custom Visuals</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                    </div>
-                </div>
-                
-                <!-- Cloud, DevOps & Tools -->
-                <div class="skills__content skills__close">
-                    <div class="skills__header">
-                        <i class="uil uil-cloud skills__icon"></i>
-                        <div>
-                            <h1 class="skills__titles">Cloud, DevOps & Tools</h1>
-                            <span class="skills__subtitle">Azure & CI/CD Tools</span>
-                        </div>
-                        <i class="uil uil-angle-down skills__arrow"></i>
-                    </div>
-                    <div class="skills__list grid">
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Azure SQL, Blob Storage, Monitor</h3><span class="skills__number">65%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Azure DevOps, CI/CD Pipelines</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Git, SSMS, VS Code</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">ServiceNow</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                    </div>
-                </div>
-                
-                <!-- Programming & Web Development -->
-                <div class="skills__content skills__close">
-                    <div class="skills__header">
-                        <i class="uil uil-brackets-curly skills__icon"></i>
-                        <div>
-                            <h1 class="skills__titles">Programming & Web Development</h1>
-                            <span class="skills__subtitle">Basic to Intermediate</span>
-                        </div>
-                        <i class="uil uil-angle-down skills__arrow"></i>
-                    </div>
-                    <div class="skills__list grid">
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SQL, C#, JavaScript, PHP, Java, C++, VB</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">HTML5, CSS3, Bootstrap, jQuery</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">ASP.NET MVC, REST APIs</h3><span class="skills__number">65%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div>
-                    </div>
-                </div>
-                </div>
-                </div>
+            </div>
             </div>
 
 
         </section>
 
-        <!--==================== Certificates ====================-->
+        
+        <!--==================== SERVICES ====================-->
         <section class="services section" id="services">
             <h2 class="section__title"style="color:black;" >Certification</h2>
             <span class="section__subtitle"></span>
+
             <div data-aos="fade-right" class="services__container container grid">
+                <!--==================== SERVICES 1 ====================-->
                 <div class="services__content">
-                    <div>
-                        <h3 class="services__title">AZ-900 <br> Microsoft Certification Azure Fundamentals</h3>
-                    </div>
-                <span class="button button--flex button--small button--link services__button">
-                    Certified
-                </span>
-                    <div class="services__modal">
-                        <div class="services__modal-content">
-                            <h4 class="services__modal-title">Certified <br> Azure Fundamentals AZ-900</h4>
-                            <i class="uil uil-times services__modal-close"></i>
+    <div>
+        <h3 class="services__title">AZ-900 <br> Microsoft Certification Azure Fundamentals</h3>
+    </div>
+
+    <span class="button button--flex button--small button--link services__button">
+        Certified
+    </span>
+
+    <div class="services__modal ">
+        <div class="services__modal-content ">
+            <h4 class="services__modal-title">Certified <br> Azure Fundamentals AZ-900</h4>
+            <i class="uil uil-times services__modal-close"></i>
+
+            <ul class="services__modal-services grid">
+                <li class="services__modal-service">
+                    <p>I am a certified AZ-900 (Microsoft Azure Fundamentals) taker.
                 
-                            <ul class="services__modal-services grid">
-                                <li class="services__modal-service">
-                                    <p>I am a certified AZ-900 (Microsoft Azure Fundamentals) taker.
-                                
-                                    Skilled in Azure core services, cloud concepts, security, compliance, and pricing models.
-                              
-                                    Earned the certification to validate my foundational cloud knowledge.</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                    Skilled in Azure core services, cloud concepts, security, compliance, and pricing models.
+              
+                    Earned the certification to validate my foundational cloud knowledge.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-             <div class="services__content">
-                  <div>
-                    <h3 class="services__title">Reviewing to Take PL 300 <br> Microsoft Power BI Data Analyst</h3>
-                  </div>
-                  
-                    <span class="button button--flex button--small button--link services__button">
-                        Not yet Certified
-                    </span>
 
-                  <div class="services__modal">
-                    <div class="services__modal-content">
-                      <h4 class="services__modal-title">Under Reviewing <br> for Taking PL-300 </h4>
-                      <i class="uil uil-times services__modal-close"></i>
-                    </div>
-                </div>
-             </div>
-                < <!--==================== New Certification Div here! ====================-->
+                <!--==================== SERVICES 2 ====================-->
+                <div class="services__content">
+  <div>
+    <h3 class="services__title">Reviewing to Take PL 300 <br> Microsoft Power BI Data Analyst</h3>
+  </div>
+  
+    <span class="button button--flex button--small button--link services__button">
+        Not yet Certified
+    </span>
+
+
+  <div class="services__modal">
+    <div class="services__modal-content">
+      <h4 class="services__modal-title">Under Reviewing <br> for Taking PL-300 </h4>
+      <i class="uil uil-times services__modal-close"></i>
+
+   
+    </div>
+  </div>
+</div>
+
+                
                 </div>
             </div>
         </section>
-
         <!--==================== PORTFOLIO ====================-->
         <section class="portfolio section" id="portfolio">
-            <h2 class="section__title" style="color:black" >Portfolio</h2>
-                <span class="section__subtitle">See my Projects</span>
-                    <div data-aos="fade-right" class="portfolio__container container swiper-container">
-                        <div class="swiper-wrapper">
-                                <!--==================== PORTFOLIO 1 ====================-->
-                            <div class="portfolio__content grid swiper-slide">
-                              <img src="assets/img/firstproject.png" alt="NYP-Store Ecommerce Website" class="portfolio__img">
-                            
-                              <div class="portfolio__data">
-                                <h3 class="portfolio__title">NYP-Store</h3>
-                                <p class="portfolio__description">
-                                  Frontend development for an ecommerce online shop.<br>
-                                  Responsive design with engaging UI components and smooth animations.<br>
-                                  Built using modern web technologies to provide a seamless shopping experience.
-                                </p>
-                                <p class="portfolio__tech">
-                                  <strong>Tech Used:</strong> HTML, CSS, Bootstrap, JavaScript, API, Json
-                                </p><br/>
-                                <a href="https://nelparole.github.io/Ecommerce-Project/" class="button button--flex button--small portfolio_-button">
-                                  Visit here!
-                                  <i class="uil uil-arrow-right button__icon"></i>
-                                </a>
-                              </div>
-                            </div>
-                            
-                            <hr style="border: 1px solid #ccc; margin: 2rem 0;">
-                            
-                            <!--==================== PORTFOLIO 2 ====================-->
-                            <br/>
-                            <div class="portfolio__content grid swiper-slide">
-                              <img src="assets/img/ERHospitalPBI.png" alt="Hospital Patient Dashboard Visual" class="portfolio__img">
-                            
-                              <div class="portfolio__data">
-                                <h3 class="portfolio__title">ER Hospital Patient Dashboard</h3>
-                                <p class="portfolio__description">
-                                  Developed an interactive Power BI dashboard to monitor hospital patient data.<br>
-                                  Utilized SQL queries for data extraction and performed data cleansing.<br>
-                                  Addressed data inconsistencies to ensure accurate and reliable reporting.
-                                </p>
-                                <p class="portfolio__tech">
-                                  <strong>Tech Used:</strong> Power BI, SQL, Excel, Data Modeling
-                                </p><br/>
-                                <a href="#" class="button button--flex button--small portfolio_-button">
-                                  In Progress
-                                  <i class="uil uil-arrow-right button__icon"></i>
-                                </a>
-                              </div>
-                            </div>
-                            
-                            <hr style="border: 1px solid #ccc; margin: 2rem 0;">
-                            
-                            <!--==================== PORTFOLIO 3 ====================-->
-                            <br/>
-                            <div class="portfolio__content grid swiper-slide">
-                              <img src="assets/img/e-commerce-api.png" alt="API Ecommerce Add-to-Cart Demo" class="portfolio__img">
-                            
-                              <div class="portfolio__data">
-                                <h3 class="portfolio__title">Ecommerce Product API</h3>
-                                <p class="portfolio__description">
-                                  This simple project demonstrates adding products to a cart based on available sizes.<br>
-                                  Some products offer multiple size options while others do not.<br>
-                                  The interface fetches real-time product data from an external API in JSON format and adapts to various viewports.
-                                </p>
-                                <p class="portfolio__tech">
-                                  <strong>Tech Used:</strong> HTML, CSS, Bootstrap, JavaScript, API, JSON
-                                </p><br/>
-                                <a href="https://nelparole.github.io/API-Product-ECommerce/" class="button button--flex button--small portfolio_-button">
-                                  Visit here!
-                                  <i class="uil uil-arrow-right button__icon"></i>
-                                </a>
-                              </div>
-                            </div>
-                               <br/>
-                            
-                                          
-                            </div>
+            <h2 class="section__title" style="color:black">Portfolio</h2>
+            <span class="section__subtitle">See my Projects</span>
+
+            <div data-aos="fade-up" class="swiper portfolio__container container">
+                <div class="swiper-wrapper">
+
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="portfolio__content">
+                    <img src="assets/img/firstproject.png" alt="NYP-Store Ecommerce Website" class="portfolio__img" />
+                    <div>
+                        <h3 class="portfolio__title">NYP-Store</h3>
+                        <p class="portfolio__description">
+                        Frontend development for an ecommerce online shop.<br />
+                        Responsive design with engaging UI components and smooth animations.<br />
+                        Built using modern web technologies to provide a seamless shopping experience.
+                        </p>
+                        <p class="portfolio__tech"><strong>Tech Used:</strong> HTML, CSS, Bootstrap, JavaScript, API, JSON</p>
+                        <a href="https://nelparole.github.io/Ecommerce-Project/" class="portfolio__btn">
+                        Visit here! <i class="uil uil-arrow-right"></i>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="portfolio__content">
+                    <img src="assets/img/secondprojectpbi.png" alt="Hospital Patient Dashboard" class="portfolio__img" />
+                    <div>
+                        <h3 class="portfolio__title">Hospital Patient Dashboard</h3>
+                        <p class="portfolio__description">
+                        Developed an interactive Power BI dashboard to monitor hospital patient data.<br />
+                        Utilized SQL queries for data extraction and performed data cleansing.<br />
+                        Addressed data inconsistencies to ensure accurate and reliable reporting.
+                        </p>
+                        <p class="portfolio__tech"><strong>Tech Used:</strong> Power BI, SQL, Excel, Data Modeling</p>
+                        <a href="#" class="portfolio__btn">
+                        In Progress <i class="uil uil-arrow-right"></i>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="portfolio__content">
+                    <img src="assets/img/e-commerce-api.png" alt="Ecommerce Product API" class="portfolio__img" />
+                    <div>
+                        <h3 class="portfolio__title">Ecommerce Product API</h3>
+                        <p class="portfolio__description">
+                        This simple project demonstrates adding products to a cart based on available sizes.<br />
+                        Some products offer multiple size options while others do not.<br />
+                        The interface fetches real-time product data from an external API in JSON format and adapts to various viewports.
+                        </p>
+                        <p class="portfolio__tech"><strong>Tech Used:</strong> HTML, CSS, Bootstrap, JavaScript, API, JSON</p>
+                        <a href="https://nelparole.github.io/API-Product-ECommerce/" class="portfolio__btn">
+                        Visit here! <i class="uil uil-arrow-right"></i>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+                    
+                </div>
+                <!-- Swiper Navigation and Pagination -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+           
+            </div>
+                                 <div class="swiper-pagination"></div>
+            </section>
+
+<!-- Experience -->
+ <h2 class="section__title" style="color:black">Experience</h2>
+<span class="section__subtitle">See below</span>
+ <section class="tour-slider-wrapper"id="experience">
+<div data-aos="fade-up" class="tour-swiper swiper-container">
+    <div class="swiper-wrapper">
 
 
-                        </div>
-        </section>
-
-        <!--==================== PROJECT IN MIND ====================-->
-
-        <!-- Add Pagination -->
-        <div class="swiper-pagination swiper-pagination-testimonial"></div>
+      <div class="tour-slide swiper-slide">
+        <div class="tour-content" data-content="one">
+          <h1>Data Engineer – ETL Developer</h1>
+          <p> Nov 2023 – Feb 2024 | Collabera Digital Inc., Manila<br>
+            At Collabera Digital, I built and maintained ETL pipelines (SSIS) for remittance systems, optimized warehouse accuracy using SCD Type 2, and helped resolve critical data discrepancies.
+            Want more details? Download my CV to learn more about my contributions.
+          </p>
         </div>
+        <div class="tour-bg background" data-item="one"></div>
+      </div>
+
+
+      <div class="tour-slide swiper-slide">
+        <div class="tour-content" data-content="two">
+          <h1>Associate Software Engineer</h1>
+          <p>
+            Apr 2022 – Jul 2023 | Accenture Inc., Manila<br>
+           As Packaged App Development Analyst, I worked on Azure Data Factory, handled global deployments, and optimized data operations and reporting.
+            Want to know more? Download my CV for the full details.
+          </p>
+        </div>
+        <div class="tour-bg background" data-item="two"></div>
+      </div>
+
+      <div class="tour-slide swiper-slide">
+        <div class="tour-content" data-content="three">
+          <h1>Web Development Intern</h1>
+    <p>
+      FEB 2019 - MAY 2019 | Bliimo Technologies Inc., Ortigas<br>
+      Developed responsive web components using React.js, HTML, and CSS; collaborated on UI implementation.
+    </p>
+        </div>
+        <div class="tour-bg background" data-item="three"></div>
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+            document.addEventListener('DOMContentLoaded', () => {
+  // Select all elements with fade-in animation (like your swiper wrapper)
+  const fadeElements = document.querySelectorAll('.fade-in-section');
+
+  const observerOptions = {
+    root: null,          // viewport
+    rootMargin: '0px',
+    threshold: 0.3       // trigger when 30% visible
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+
+        // If you want to fade-in only once and not remove later:
+        observer.unobserve(entry.target);
+      } else {
+        // If you want fade-out on scroll up, remove visible class here:
+        // entry.target.classList.remove('visible');
+      }
+    });
+  }, observerOptions);
+
+  fadeElements.forEach(el => observer.observe(el));
+
+  // Initialize Swiper as you had it
+  const swiper = new Swiper(".tour-swiper", {
+    direction: "vertical",
+    effect: "fade",
+    speed: 1000,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    on: {
+      init: function () {
+        const firstSlide = this.slides[this.activeIndex];
+        const background = firstSlide.querySelector(".tour-bg");
+        if (background) background.classList.add("animation");
+      },
+      slideChange: function () {
+        this.slides.forEach((slide) => {
+          const background = slide.querySelector(".tour-bg");
+          if (background) background.classList.remove("animation");
+        });
+        const activeSlide = this.slides[this.activeIndex];
+        const background = activeSlide.querySelector(".tour-bg");
+        if (background) background.classList.add("animation");
+      },
+    },
+  });
+
+  const swiperEl = document.querySelector(".tour-swiper");
+
+  swiperEl.addEventListener("mouseenter", () => {
+    swiper.params.mousewheel = {
+      enabled: true,
+      invert: false,
+      forceToAxis: false,
+      thresholdDelta: 50,
+      sensitivity: 1,
+    };
+    swiper.mousewheel.enable();
+  });
+
+  swiperEl.addEventListener("mouseleave", () => {
+    swiper.mousewheel.disable();
+  });
+});
+
+    </script>
+
+
+
+
+
+        <!--==================== EXPERIENCE
+        <section class="experience section" id="experience">
+            <h2 class="section__title" style="color:black;">Experience</h2>
+            <span class="section__subtitle">My professional journey</span>
+            <div class="experience__container container">
+                <div class="experience__timeline">
+                    <div class="experience__item" data-aos="fade-right">
+                        <div class="experience__dot"></div>
+                        <div class="experience__content">
+                            <h3 class="experience__role">ETL Developer / Data Engineer</h3>
+                            <span class="experience__company">Your Company Name</span>
+                            <span class="experience__date">2023 – 2025</span>
+                            <p class="experience__desc">
+                                Developed and maintained ETL pipelines using SSIS and Azure Data Factory.<br>
+                                Built Power BI dashboards and optimized SQL queries for reporting.<br>
+                                Collaborated with cross-functional teams to deliver data solutions.
+                            </p>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
         </section>
+        ====================-->
+
+
+
+
+
+
+
+
 
     <!--==================== FOOTER ====================-->
     <footer class="footer">
@@ -496,6 +680,7 @@
             backSpeed: 100,
             loop: true,
         });
+
     </script>
 
     <!--=================== Animate scroll js ===============-->
@@ -506,6 +691,34 @@
             duration: 2000
         });
     </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+
+
+    <script>
+  // Theme toggle functionality
+  const themeButton = document.getElementById('theme-button');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+
+  // Apply saved theme on page load
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+
+  // Toggle theme on button click
+  themeButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    
+    // Save current theme in localStorage
+    const newTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    localStorage.setItem('theme', newTheme);
+
+    
+  });
+</script>
+
 
 </body>
 
