@@ -1,6 +1,5 @@
 /*==================== GOOGLE FONTS ====================*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
 /*==================== VARIABLES CSS ====================*/
 :root {
   --header-height: 3rem;
@@ -85,6 +84,65 @@ body.dark-theme {
   --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
   --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
 }
+
+/* ========== Added styles for color only (no size changes) ========== */
+body {
+  font-family: var(--body-font);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h2 {
+  color: var(--title-color);
+  transition: color 0.3s;
+}
+
+/* When night mode enabled */
+body.dark-theme h2 {
+  color: white !important;
+}
+body.dark-theme i {
+  color: white !important;
+}
+.services__content {
+  background-color: rgb(88, 104, 119);  /* default light mode */
+  color: black;             /* default text color */
+  transition: background-color 0.3s, color 0.3s;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+
+body.dark-theme .services__content h3,
+body.dark-theme .services__content h4,
+body.dark-theme .services__content p,
+body.dark-theme .services__content span {
+  color: white !important;
+}
+.services__content {
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: none; /* no shadow in light mode */
+  transform: none;  /* no lift in light mode */
+}
+
+body.dark-theme .services__content {
+  background-color:   hsl(225deg 84.44% 9.9% / 98%);
+  color: white;
+  box-shadow: 0 5px 10px hsl(197, 5%, 75%);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+body.dark-theme .services__content:hover {
+  box-shadow: hsl(190, 15%, 92%);
+  transform: translateY(-6px);
+}
+
+
 
 /*========== Button Dark/Light ==========*/
 .nav__btns {
@@ -714,93 +772,210 @@ img {
 }
 
 /*==================== PORTFOLIO ====================*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .portfolio__container {
-  overflow: initial;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+
+  padding: 2rem 0 5rem; /* <-- Add more space at bottom for pagination */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 7rem; /* side space for buttons */
+  box-sizing: border-box;
+
 }
 
 .portfolio__content {
-  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 460px;
+  align-items: center;
+  text-align: left;
+
+  background-color: #f5f5f5; /* Light mode background */
+  border-radius: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  width: 100%; /* ensure full width */
 }
 
 .portfolio__img {
-  width: 265px;
-  border-radius: .5rem;
-  justify-self: center;
+  width: 80%;       /* smaller image on mobile, but still responsive */
+  max-width: 300px; /* cap max size */
+  height: auto;
+  margin-bottom: 1rem;
+  align-self: center;
+}
+
+.portfolio__text {
+  width: 100%;
+  overflow-y: visible;
 }
 
 .portfolio__title {
-  font-size: var(--h3-font-size);
-  margin-bottom: var(--mb-0-5);
+  font-size: var(--h3-font-size, 1.5rem);
+  margin-bottom: 0.5rem;
 }
 
 .portfolio__description {
-  margin-bottom: var(--mb-0-75);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
 }
 
-.portfolio__button:hover .button__icon {
-  transform: translateX(.25rem);
+.portfolio__tech {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #444;
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  content: '';
+.portfolio__btn {
+  font-weight: 600;
+  text-decoration: none;
+  color: #007bff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.3s ease;
 }
 
-.swiper-portfolio-icon {
-  font-size: 2rem;
-  color: var(--first-color);
+.portfolio__btn:hover {
+  color: #0056b3;
+}
+
+.portfolio__btn i {
+  transition: transform 0.3s ease;
+}
+
+.portfolio__btn:hover i {
+  transform: translateX(0.25rem);
+}
+
+/* Swiper buttons */
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  z-index: 10;
+  color: var(--first-color);  /* use the CSS variable here */
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease; /* only color transition */
+  background: transparent; /* explicitly no background */
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  /* only change icon color on hover, no background */
+  color: darken(var(--first-color), 10%);
 }
 
 .swiper-button-prev {
-  left: -.5rem;
+  left: 1rem;
 }
 
 .swiper-button-next {
-  right: -.5rem;
+  right: 1rem;
 }
 
-.swiper-container-horizontal>.swiper-pagination-bullets {
-  bottom: -2.5rem;
+/* Swiper Pagination - Centered below the content */
+.swiper-pagination {
+  margin: 1.5rem auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.swiper-pagination-bullet-active {
-  background-color: var(--first-color);
+@media screen and (max-width: 769px) {
+  .swiper-slide {
+    padding: 2.5rem;
+  }
+
+  .portfolio__content {
+    height: auto;       /* allow height to grow */
+    min-height: 460px;  /* optional min height */
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .portfolio__img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+    align-self: center;   /* center the image */
+  }
+
+  .portfolio__text {
+    width: 100%;
+    overflow-y: visible;
+  }
+
+  /* Keep swiper buttons spaced apart */
+  .swiper-button-prev {
+    left: 0.5rem; /* closer to edge */
+  }
+
+  .swiper-button-next {
+    right: 0.5rem; /* closer to edge */
+  }
 }
 
-.swiper-button-prev,
-.swiper-button-next,
-.swiper-pagination-bullet {
-  outline: none;
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .portfolio__content {
+    background-color: #ffffff00;
+  }
+
+  .portfolio__tech {
+    color: #ccc;
+  }
+
+  .portfolio__btn {
+    color: #5dade2;
+  }
+
+  .portfolio__btn:hover {
+    color: #3a78c2;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #5dade2;
+  }
+
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    color: #3a78c2;
+  }
 }
 
-/*==================== PROJECT IN MIND ====================*/
-.project {
-  text-align: center;
-}
 
-.project__bg {
-  background-color: var(--first-color-second);
-  padding-top: 3rem;
-}
-
-.project__title {
-  font-size: var(--h2-font-size);
-  margin-bottom: var(--mb-0-75);
-}
-
-.project__description {
-  margin-bottom: var(--mb-1-5);
-}
-
-.project__title,
-.project__description {
-  color: #fff;
-}
-
-.project__img {
-  width: 232px;
-  justify-self: center;
-}
 
 
 
@@ -1381,4 +1556,373 @@ footer .footer__social a:hover {
 .skills__logo:hover{
   transform: translateY(-.25rem);
   transition: 1s;
+}
+
+
+
+
+/* Experience Timeline 
+.experience__timeline {
+    position: relative;
+    margin-left: 2rem;
+    border-left: 2px solid #0b0f2f;
+    padding-left: 2rem;
+}
+.experience__item {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+.experience__dot {
+    position: absolute;
+    left: -1.1rem;
+    top: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    background: #0b0f2f;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.experience__role {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.experience__company,
+.experience__date {
+    display: block;
+    font-size: 0.95rem;
+    color: #888;
+}
+.experience__desc {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+    */
+
+    /* Always show Swiper navigation arrows */
+.tour-swiper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.tour-slide {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+.tour-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 14%;
+  left: 3%;
+  width: 40%;
+  color: #fdffff;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  z-index: 2;
+  background-color: #0056b3;
+}
+
+.tour-content h1 {
+  font-family: "Salsa", cursive;
+  font-size: clamp(2rem, 3vw, 6rem);
+  margin-bottom: 20px;
+  opacity: 0;
+  color: hsla(0, 0%, 100%, 0.98);
+}
+
+.tour-content p {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 500;
+  opacity: 0;
+}
+
+.swiper-slide-active .tour-content {
+  opacity: 1;
+}
+
+.swiper-slide-active .tour-content h1 {
+  animation: moveDown 0.8s ease-in forwards;
+}
+
+.swiper-slide-active .tour-content p {
+  animation: moveDown 1s ease-in forwards;
+  animation-delay: 1s;
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.tour-bg[data-item="one"] {
+  background: url("../img/collaberadigital.jpg");
+  background-size: cover;
+  background-position: 50% 40%;
+}
+
+.tour-bg[data-item="two"] {
+  background: url("../img/acn.jpg");
+  background-size: cover;
+  background-position: 50% 40%;
+}
+
+.tour-bg[data-item="three"] {
+  background: url("../img/bliimo.jpg");
+  background-size: cover;
+  background-position: 50% 40%;
+}
+
+.tour-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(5%);
+  filter: brightness(90%);
+  overflow: hidden;
+  opacity: 0;
+  z-index: 1;
+}
+
+.animation {
+  animation: resizeClipPath 3s ease-in-out forwards;
+}
+
+@keyframes resizeClipPath {
+  0% {
+    clip-path: circle(5%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: circle(71%);
+    opacity: 1;
+  }
+}
+
+.swiper-pagination-bullet {
+  width: 16px;
+  height: 16px;
+  background-color: #a3a6a3;
+  border-radius: 50%;
+  transition: all 0.6s ease-in-out;
+}
+
+.swiper-pagination-bullet-active {
+  height: 32px;
+  background-image: linear-gradient(180deg, #f09819 0%, #ff512f 100%);
+  border-radius: 14px;
+}
+
+.tour-feature {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.tour-feature i {
+  font-size: 1.4rem;
+}
+
+.tour-feature p {
+  font-weight: 700;
+}
+
+.tour-btn {
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 10px;
+  background-image: linear-gradient(45deg, #ff512f 0%, #f09819 51%, #ff512f 100%);
+  background-size: 200% auto;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.tour-btn:hover {
+  background-position: right center;
+}
+
+.tour-btn:active {
+  transform: scale(0.95);
+}
+
+.tour-logo {
+  position: fixed;
+  right: -20px;
+  bottom: -35px;
+  z-index: 10;
+}
+
+.tour-logo img {
+  width: 120px;
+}
+
+@media (max-width: 890px) {
+  .tour-logo {
+    right: -10px;
+    bottom: -20px;
+  }
+
+  .tour-logo img {
+    width: 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .tour-content {
+    top: 18%;
+  }
+
+  .tour-content[data-content="two"],
+  .tour-content[data-content="three"] {
+    top: 5%;
+    width: 50%;
+  }
+}
+
+@media (max-width: 900px) {
+  .tour-content {
+    top: 55%;
+    left: 2%;
+    width: 60%;
+  }
+
+  .tour-content[data-content="two"] {
+    top: 10%;
+  }
+
+  .tour-content h1 {
+    margin-bottom: 14px;
+  }
+
+  .tour-content p {
+    font-size: 1rem;
+  }
+
+  .tour-feature i {
+    font-size: 1.3rem;
+  }
+
+  .tour-feature p {
+    font-size: 1rem;
+  }
+
+  .tour-btn {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 660px) {
+  .tour-content {
+    bottom: 3%;
+    top: unset;
+    left: 2%;
+    width: 80%;
+  }
+
+  .tour-content p {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .tour-bg[data-item="two"] {
+    background-position: 40% 50%;
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+  }
+
+  .swiper-pagination-bullet-active {
+    height: 24px;
+  }
+
+  .tour-feature,
+  hr {
+    display: none;
+  }
+}
+
+/* Make pagination bullets stack vertically */
+.swiper-pagination {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 836px) {
+  .tour-bg {
+    clip-path: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  /* Consistent styling for all tour-content */
+  .tour-content {
+    position: absolute !important;
+    width: 90% !important;
+    bottom: 10% !important;
+    top: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+
+  /* Reset margin for h1 and p inside slides 2 and 3 */
+  .tour-content[data-content="two"] h1,
+  .tour-content[data-content="three"] h1,
+  .tour-content[data-content="two"] p,
+  .tour-content[data-content="three"] p {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Font sizing */
+  .tour-content h1 {
+    font-size: 1.8rem !important;
+  }
+
+  .tour-content p {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
 }
