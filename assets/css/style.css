@@ -1682,7 +1682,11 @@ footer .footer__social a:hover {
   background-size: cover;
   background-position: 50% 40%;
 }
-
+.tour-bg[data-item="four"] {
+  background: url("../img/ep.jpg");
+  background-size: cover;
+  background-position: 50% 40%;
+}
 .tour-bg {
   position: absolute;
   inset: 0;
