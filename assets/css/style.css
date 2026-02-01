@@ -1683,7 +1683,7 @@ footer .footer__social a:hover {
   background-position: 50% 40%;
 }
 .tour-bg[data-item="four"] {
-  background: url("../img/ep.jpg");
+  background: url("../img/ep1.jpg");
   background-size: cover;
   background-position: 50% 40%;
 }
@@ -2274,5 +2274,6 @@ body.dark-theme .progress {
   flex-shrink: 0;
   fill: white;
 }
+
 
 
