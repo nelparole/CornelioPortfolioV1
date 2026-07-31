@@ -430,6 +430,99 @@ portfolioEnhancementStyles.textContent = `
         opacity: 1;
     }
 
+    body:not(.dark-theme) .about.section .section__title,
+    body:not(.dark-theme) .about.section .about__info-title,
+    body.dark-theme .about.section .section__title,
+    body.dark-theme .about.section .about__info-title {
+        color: #ffffff !important;
+    }
+
+    body:not(.dark-theme) .about.section .about__description,
+    body.dark-theme .about.section .about__description {
+        color: #e8eef8 !important;
+    }
+
+    body:not(.dark-theme) .about.section .about__info-name,
+    body.dark-theme .about.section .about__info-name {
+        color: #ffffff !important;
+    }
+
+    body:not(.dark-theme) .about.section .section__title::after,
+    body.dark-theme .about.section .section__title::after {
+        background: linear-gradient(90deg, #38bdf8, rgba(56, 189, 248, .28));
+    }
+
+    body.dark-theme .header {
+        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+    }
+
+    body.dark-theme .scroll-header {
+        background: rgba(16, 23, 38, .86);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, .28);
+        backdrop-filter: blur(14px);
+    }
+
+    body.dark-theme .nav__link {
+        border-radius: 999px;
+        padding: .45rem .75rem;
+        position: relative;
+        transition: color .25s ease, background .25s ease, transform .25s ease;
+    }
+
+    body.dark-theme .nav__link::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: .18rem;
+        width: 1.15rem;
+        height: 2px;
+        border-radius: 999px;
+        background: #38bdf8;
+        opacity: 0;
+        transform: translateX(-50%) scaleX(.35);
+        transition: opacity .25s ease, transform .25s ease;
+    }
+
+    body.dark-theme .nav__link:hover {
+        color: #e8f7ff;
+        background: rgba(56, 189, 248, .12);
+        transform: translateY(-2px);
+    }
+
+    body.dark-theme .nav__link:hover::after,
+    body.dark-theme .nav__link.active-link::after {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    body.dark-theme .section__title {
+        color: #f8fbff !important;
+    }
+
+    body.dark-theme .section__subtitle,
+    body.dark-theme .skills__subtitle {
+        color: #cbd5e1 !important;
+    }
+
+    body.dark-theme .skills__header .skills__titles,
+    body.dark-theme .skills__name,
+    body.dark-theme .skills__icon,
+    body.dark-theme .portfolio__title {
+        color: #38bdf8 !important;
+    }
+
+    body.dark-theme .skills__number {
+        color: #e5edf8 !important;
+    }
+
+    body.dark-theme .skills__bar {
+        background: rgba(148, 163, 184, .28);
+    }
+
+    body.dark-theme .skills__percentage {
+        background: linear-gradient(90deg, #38bdf8, #a5b4fc);
+    }
+
     @media screen and (max-width: 767px) {
         .skills__container {
             column-gap: 0;
