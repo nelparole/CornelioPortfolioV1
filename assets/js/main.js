@@ -523,6 +523,122 @@ portfolioEnhancementStyles.textContent = `
         background: linear-gradient(90deg, #38bdf8, #a5b4fc);
     }
 
+    .wizard__choices {
+        max-width: 640px;
+        gap: .85rem;
+        padding: 1.25rem 0 0;
+    }
+
+    .wizard__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: .75rem;
+        min-height: 3.75rem;
+        padding: .85rem 1rem;
+        border: 1px solid rgba(23, 123, 152, .18);
+        border-radius: .7rem;
+        background: #fff;
+        color: var(--portfolio-ink, #172033);
+        font-size: .94rem;
+        font-weight: 650;
+        line-height: 1;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, .05);
+        transition: border-color .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+
+    .wizard__btn i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.15rem;
+        height: 2.15rem;
+        border-radius: .55rem;
+        background: rgba(23, 123, 152, .08);
+        color: var(--portfolio-accent, #177b98);
+        font-size: 1.15rem;
+        flex: 0 0 auto;
+        transition: background .25s ease, color .25s ease, transform .25s ease;
+    }
+
+    .wizard__btn:hover {
+        border-color: rgba(23, 123, 152, .35);
+        background: #f8fcfe;
+        color: var(--portfolio-ink, #172033);
+        box-shadow: 0 14px 32px rgba(15, 23, 42, .08);
+        transform: translateY(-2px);
+    }
+
+    .wizard__btn:hover i {
+        background: var(--portfolio-accent, #177b98);
+        color: #fff;
+        transform: scale(1.04);
+    }
+
+    .wizard__buttons .wizard__btn {
+        justify-content: center;
+        width: auto;
+        min-width: 8.5rem;
+    }
+
+    .wizard__btn.primary {
+        border-color: var(--portfolio-ink, #172033);
+        background: var(--portfolio-ink, #172033);
+        color: #fff;
+    }
+
+    .wizard__btn.primary:hover {
+        background: var(--portfolio-accent, #177b98);
+        border-color: var(--portfolio-accent, #177b98);
+        color: #fff;
+    }
+
+    .wizard__btn.secondary {
+        border-color: rgba(100, 116, 139, .22);
+        color: var(--portfolio-muted, #667085);
+        background: #fff;
+    }
+
+    .wizard__btn.secondary:hover {
+        border-color: rgba(100, 116, 139, .34);
+        background: #f8fafc;
+        color: var(--portfolio-ink, #172033);
+    }
+
+    body.dark-theme .wizard__btn {
+        border-color: rgba(148, 163, 184, .18) !important;
+        background: rgba(30, 41, 59, .72) !important;
+        color: #e8eef8 !important;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, .18);
+    }
+
+    body.dark-theme .wizard__btn i {
+        background: rgba(56, 189, 248, .12);
+        color: #38bdf8;
+    }
+
+    body.dark-theme .wizard__btn:hover {
+        border-color: rgba(56, 189, 248, .38) !important;
+        background: rgba(15, 23, 42, .92) !important;
+        color: #fff !important;
+    }
+
+    body.dark-theme .wizard__btn:hover i {
+        background: #38bdf8;
+        color: #0f172a;
+    }
+
+    body.dark-theme .wizard__btn.primary {
+        border-color: #38bdf8 !important;
+        background: #38bdf8 !important;
+        color: #0f172a !important;
+    }
+
+    body.dark-theme .wizard__btn.secondary {
+        border-color: rgba(148, 163, 184, .22) !important;
+        color: #cbd5e1 !important;
+    }
+
     @media screen and (max-width: 767px) {
         .skills__container {
             column-gap: 0;
@@ -578,6 +694,21 @@ if (homeData && !document.querySelector('.home__focus')) {
     });
     homeDescription?.after(focus);
 }
+
+const contactChoiceIcons = {
+    'Job Opportunity': 'uil-briefcase-alt',
+    'Collaboration': 'uil-users-alt',
+    'Consultation': 'uil-comment-question',
+    'General Message': 'uil-comment-alt-message',
+};
+
+document.querySelectorAll('#step1 .wizard__btn').forEach((button) => {
+    const label = Object.keys(contactChoiceIcons).find((item) => button.textContent.includes(item));
+
+    if (label) {
+        button.innerHTML = `<i class="uil ${contactChoiceIcons[label]}" aria-hidden="true"></i><span>${label}</span>`;
+    }
+});
 
 document.querySelectorAll('.portfolio__tech').forEach((tech) => {
     if (tech.dataset.enhanced === 'true') {
