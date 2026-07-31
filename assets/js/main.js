@@ -152,7 +152,7 @@ if (homeDescription) {
 if (homeData && !document.querySelector('.home__focus')) {
     const focus = document.createElement('div');
     focus.className = 'home__focus';
-    ['ETL Development', 'Power BI & DAX', 'Mapbox Analytics', 'AI-Assisted Builds'].forEach((label) => {
+    ['ETL Development', 'Power BI & DAX'].forEach((label) => {
         const pill = document.createElement('span');
         pill.className = 'home__focus-pill';
         pill.textContent = label;
