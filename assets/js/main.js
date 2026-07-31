@@ -148,10 +148,10 @@ portfolioEnhancementStyles.textContent = `
         min-height: 0;
         height: 100%;
         padding: 1.1rem;
-        border: 1px solid rgba(148, 163, 184, .24);
-        border-radius: .75rem;
-        background: rgba(255, 255, 255, .96);
-        box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+        border: none;
+        border-radius: .5rem;
+        background: #fff;
+        box-shadow: 0 10px 28px rgba(15, 23, 42, .07);
     }
 
     .portfolio__content > div {
@@ -169,11 +169,11 @@ portfolioEnhancementStyles.textContent = `
         min-height: 280px;
         max-height: 360px;
         margin: 0;
-        border-radius: .6rem;
+        border-radius: .45rem;
         object-fit: cover;
         object-position: top center;
         background: #f8fafc;
-        border: 1px solid rgba(148, 163, 184, .18);
+        border: none;
         box-shadow: none;
     }
 
@@ -238,16 +238,21 @@ portfolioEnhancementStyles.textContent = `
     .portfolio__container .swiper-button-next {
         width: 2.55rem;
         height: 2.55rem;
-        border: 1px solid rgba(148, 163, 184, .22);
-        background: rgba(255, 255, 255, .92);
-        color: var(--first-color-bit-lighter);
-        box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, .94);
+        color: #0f172a;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, .12);
+        backdrop-filter: blur(12px);
+        transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
     }
 
     .portfolio__container .swiper-button-prev:hover,
     .portfolio__container .swiper-button-next:hover {
         color: #fff;
-        background: var(--first-color);
+        background: #0f172a;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, .18);
+        transform: translateY(-50%) scale(1.04);
     }
 
     .portfolio__container .swiper-button-prev:after,
