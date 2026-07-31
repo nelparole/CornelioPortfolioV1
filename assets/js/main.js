@@ -38,6 +38,98 @@ skillsHeader.forEach((el) => {
     el.addEventListener('click', toggleSkills);
 });
 
+/*==================== PROFILE CONTENT UPDATES ====================*/
+const aboutDescription = document.querySelector('.about__description');
+const aboutInfoTitles = document.querySelectorAll('.about__info-title');
+const aboutInfoNames = document.querySelectorAll('.about__info-name');
+
+if (aboutDescription) {
+    aboutDescription.textContent = 'Hi, I’m Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I’m passionate about turning raw data into clear insights and reliable data solutions.';
+}
+
+if (aboutInfoTitles[0]) {
+    aboutInfoTitles[0].textContent = '<03';
+}
+
+if (aboutInfoNames[1]) {
+    aboutInfoNames[1].innerHTML = 'Available to Message<br />';
+}
+
+function createSkillData(name, level) {
+    const skill = document.createElement('div');
+    skill.className = 'skills__data';
+    skill.innerHTML = `<div class="skills__titles"><h3 class="skills__name">${name}</h3><span class="skills__number">${level}%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div>`;
+    return skill;
+}
+
+function addSkillItem(sectionTitle, name, level) {
+    const section = Array.from(document.querySelectorAll('.skills__content')).find((content) => {
+        const title = content.querySelector('.skills__titles');
+        return title && title.textContent.trim() === sectionTitle;
+    });
+
+    if (!section || section.querySelector(`[data-skill="${name}"]`)) {
+        return;
+    }
+
+    const skill = createSkillData(name, level);
+    skill.dataset.skill = name;
+    section.querySelector('.skills__list')?.appendChild(skill);
+}
+
+function addSkillSection({ title, subtitle, icon, skills }) {
+    const container = document.querySelector('.skills__container > div:last-child');
+    const exists = Array.from(document.querySelectorAll('.skills__content .skills__titles')).some((heading) => heading.textContent.trim() === title);
+
+    if (!container || exists) {
+        return;
+    }
+
+    const section = document.createElement('div');
+    section.className = 'skills__content skills__close';
+    section.innerHTML = `
+        <div class="skills__header">
+            <i class="uil ${icon} skills__icon"></i>
+            <div>
+                <h1 class="skills__titles">${title}</h1>
+                <span class="skills__subtitle">${subtitle}</span>
+            </div>
+            <i class="uil uil-angle-down skills__arrow"></i>
+        </div>
+        <div class="skills__list grid"></div>
+    `;
+
+    const list = section.querySelector('.skills__list');
+    skills.forEach(({ name, level }) => list.appendChild(createSkillData(name, level)));
+    container.appendChild(section);
+    section.querySelector('.skills__header').addEventListener('click', toggleSkills);
+}
+
+addSkillItem('Data Engineering & ETL', 'KNIME Analytics Platform', 70);
+addSkillItem('Business Intelligence & Reporting', 'DAX Measures & Calculations', 75);
+
+addSkillSection({
+    title: 'Geospatial Analytics & Mapping',
+    subtitle: 'Mapbox, Power BI Maps & Location-Based Analysis',
+    icon: 'uil-map-marker',
+    skills: [
+        { name: 'Mapbox Map Development for Power BI', level: 70 },
+        { name: 'Map-Based Data Analysis', level: 75 },
+        { name: 'Geospatial Data Visualization', level: 70 },
+    ],
+});
+
+addSkillSection({
+    title: 'AI-Assisted Development',
+    subtitle: 'Codex, Copilot & AI-Enhanced Workflows',
+    icon: 'uil-robot',
+    skills: [
+        { name: 'OpenAI Codex for Development Support', level: 75 },
+        { name: 'GitHub Copilot-Assisted Coding', level: 75 },
+        { name: 'AI-Driven Debugging & Workflow Automation', level: 70 },
+    ],
+});
+
 /*==================== SKILLS BAR WIDTH ====================*/
 document.querySelectorAll('.skills__data').forEach((skill) => {
     const number = skill.querySelector('.skills__number');
