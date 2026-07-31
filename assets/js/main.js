@@ -43,6 +43,123 @@ const aboutDescription = document.querySelector('.about__description');
 const aboutInfoTitles = document.querySelectorAll('.about__info-title');
 const aboutInfoNames = document.querySelectorAll('.about__info-name');
 const skillsSectionTitles = document.querySelectorAll('.skills__content .skills__titles');
+const homeDescription = document.querySelector('.home__description');
+const homeData = document.querySelector('.home__data');
+
+const portfolioEnhancementStyles = document.createElement('style');
+portfolioEnhancementStyles.textContent = `
+    .home__focus {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .55rem;
+        margin: -1rem 0 1.75rem;
+    }
+
+    .home__focus-pill {
+        border: 1px solid rgba(23, 123, 152, .22);
+        border-radius: 999px;
+        color: var(--first-color-bit-lighter);
+        font-size: var(--smaller-font-size);
+        font-weight: var(--font-medium);
+        line-height: 1;
+        padding: .55rem .75rem;
+        background: rgba(23, 123, 152, .07);
+    }
+
+    .skills__container {
+        align-items: start;
+        column-gap: 4rem;
+        row-gap: .75rem;
+    }
+
+    .skills__content {
+        padding: .15rem 0 .75rem;
+    }
+
+    .skills__header {
+        align-items: center;
+        margin-bottom: 1.25rem;
+    }
+
+    .skills__content.skills__close .skills__header {
+        margin-bottom: 1.45rem;
+    }
+
+    .skills__header .skills__titles {
+        font-size: 1.55rem;
+        line-height: 1.25;
+    }
+
+    .skills__icon {
+        font-size: 1.65rem;
+        margin-right: 1rem;
+        min-width: 1.65rem;
+    }
+
+    .skills__arrow {
+        font-size: 1.35rem;
+    }
+
+    .skills__subtitle {
+        display: block;
+        line-height: 1.45;
+        max-width: 18rem;
+    }
+
+    .skills__list {
+        padding-left: 2.65rem;
+        row-gap: .95rem;
+    }
+
+    .skills__titles {
+        margin-bottom: .35rem;
+    }
+
+    .skills__name {
+        font-size: .9rem;
+    }
+
+    .skills__number {
+        color: var(--text-color);
+        font-size: .88rem;
+    }
+
+    .skills__bar,
+    .skills__percentage {
+        height: 4px;
+    }
+
+    .skills__bar {
+        overflow: hidden;
+    }
+
+    @media screen and (max-width: 767px) {
+        .skills__container {
+            column-gap: 0;
+        }
+
+        .skills__header .skills__titles {
+            font-size: 1.45rem;
+        }
+    }
+`;
+document.head.appendChild(portfolioEnhancementStyles);
+
+if (homeDescription) {
+    homeDescription.textContent = 'Data Engineer and BI Developer focused on ETL pipelines, SQL, Power BI, geospatial analytics, and AI-assisted workflows that turn raw data into reliable insights.';
+}
+
+if (homeData && !document.querySelector('.home__focus')) {
+    const focus = document.createElement('div');
+    focus.className = 'home__focus';
+    ['ETL Development', 'Power BI & DAX', 'Mapbox Analytics', 'AI-Assisted Builds'].forEach((label) => {
+        const pill = document.createElement('span');
+        pill.className = 'home__focus-pill';
+        pill.textContent = label;
+        focus.appendChild(pill);
+    });
+    homeDescription?.after(focus);
+}
 
 if (aboutDescription) {
     aboutDescription.textContent = 'Hi, I’m Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I’m passionate about turning raw data into clear insights and reliable data solutions.';
