@@ -4,15 +4,20 @@ const navMenu = document.getElementById('nav-menu'),
     navClose = document.getElementById('nav-close');
 
 if (navToggle) {
-    navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.add('show-menu');
+    });
 }
 if (navClose) {
-    navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
+    navClose.addEventListener('click', () => {
+        navMenu.classList.remove('show-menu');
+    });
 }
 
 const navLink = document.querySelectorAll('.nav__link');
 function linkAction() {
-    document.getElementById('nav-menu')?.classList.remove('show-menu');
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.remove('show-menu');
 }
 navLink.forEach(n => n.addEventListener('click', linkAction));
 
@@ -21,7 +26,7 @@ const skillsContent = document.getElementsByClassName('skills__content'),
     skillsHeader = document.querySelectorAll('.skills__header');
 
 function toggleSkills() {
-    const itemClass = this.parentNode.className;
+    let itemClass = this.parentNode.className;
     for (let i = 0; i < skillsContent.length; i++) {
         skillsContent[i].className = 'skills__content skills__close';
     }
@@ -29,9 +34,11 @@ function toggleSkills() {
         this.parentNode.className = 'skills__content skills__open';
     }
 }
-skillsHeader.forEach((el) => el.addEventListener('click', toggleSkills));
+skillsHeader.forEach((el) => {
+    el.addEventListener('click', toggleSkills);
+});
 
-/*==================== PROFILE AND DESIGN UPDATES ====================*/
+/*==================== PROFILE CONTENT UPDATES ====================*/
 const aboutDescription = document.querySelector('.about__description');
 const aboutInfoTitles = document.querySelectorAll('.about__info-title');
 const aboutInfoNames = document.querySelectorAll('.about__info-name');
@@ -57,6 +64,49 @@ portfolioEnhancementStyles.textContent = `
         line-height: 1;
         padding: .55rem .75rem;
         background: rgba(23, 123, 152, .07);
+    }
+
+    body:not(.dark-theme) .header {
+        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+    }
+
+    body:not(.dark-theme) .scroll-header {
+        background: rgba(255, 255, 255, .86);
+        box-shadow: 0 8px 28px rgba(15, 23, 42, .08);
+        backdrop-filter: blur(14px);
+    }
+
+    body:not(.dark-theme) .nav__link {
+        border-radius: 999px;
+        padding: .45rem .75rem;
+        position: relative;
+        transition: color .25s ease, background .25s ease, transform .25s ease;
+    }
+
+    body:not(.dark-theme) .nav__link::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: .18rem;
+        width: 1.15rem;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--first-color);
+        opacity: 0;
+        transform: translateX(-50%) scaleX(.35);
+        transition: opacity .25s ease, transform .25s ease;
+    }
+
+    body:not(.dark-theme) .nav__link:hover {
+        color: var(--first-color);
+        background: rgba(23, 123, 152, .08);
+        transform: translateY(-2px);
+    }
+
+    body:not(.dark-theme) .nav__link:hover::after,
+    body:not(.dark-theme) .nav__link.active-link::after {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
     }
 
     .section {
@@ -307,11 +357,11 @@ portfolioEnhancementStyles.textContent = `
     }
 
     .portfolio__container .swiper-button-prev {
-        left: .25rem;
+        left: 1rem;
     }
 
     .portfolio__container .swiper-button-next {
-        right: .25rem;
+        right: 1rem;
     }
 
     .portfolio .swiper-pagination {
@@ -529,11 +579,15 @@ let modal = function (modalClick) {
     modalViews[modalClick].classList.add('active-modal');
 };
 modalBtns.forEach((modalBtn, i) => {
-    modalBtn.addEventListener('click', () => modal(i));
+    modalBtn.addEventListener('click', () => {
+        modal(i);
+    });
 });
 modalCloses.forEach((modalClose) => {
     modalClose.addEventListener('click', () => {
-        modalViews.forEach((modalView) => modalView.classList.remove('active-modal'));
+        modalViews.forEach((modalView) => {
+            modalView.classList.remove('active-modal');
+        });
     });
 });
 
@@ -552,6 +606,8 @@ const swiperPortfolio = new Swiper('.portfolio__container', {
     clickable: true,
   },
 });
+
+
 
 /*==================== TESTIMONIAL SWIPER ====================*/
 let swiperTestimonial = new Swiper('.testimonial__container', {
@@ -578,14 +634,10 @@ function scrollActive() {
         const sectionHeight = current.offsetHeight;
         const sectionTop = current.offsetTop - 50;
         const sectionId = current.getAttribute('id');
-        const link = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
-        if (!link) {
-            return;
-        }
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            link.classList.add('active-link');
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link');
         } else {
-            link.classList.remove('active-link');
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link');
         }
     });
 }
@@ -605,7 +657,7 @@ function scrollUp() {
 }
 window.addEventListener('scroll', scrollUp);
 
-/*==================== DARK LIGHT THEME ====================*/
+/*==================== DARK LIGHT THEME ====================*/ 
 const themeButton = document.getElementById('theme-button');
 const darkTheme = 'dark-theme';
 const iconTheme = 'uil-sun';
@@ -614,16 +666,14 @@ const selectedIcon = localStorage.getItem('selected-icon');
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
 
-if (themeButton && selectedTheme) {
+if (selectedTheme) {
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
     themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
 }
 
-if (themeButton) {
-    themeButton.addEventListener('click', () => {
-        document.body.classList.toggle(darkTheme);
-        themeButton.classList.toggle(iconTheme);
-        localStorage.setItem('selected-theme', getCurrentTheme());
-        localStorage.setItem('selected-icon', getCurrentIcon());
-    });
-}
+themeButton.addEventListener('click', () => {
+    document.body.classList.toggle(darkTheme);
+    themeButton.classList.toggle(iconTheme);
+    localStorage.setItem('selected-theme', getCurrentTheme());
+    localStorage.setItem('selected-icon', getCurrentIcon());
+});
