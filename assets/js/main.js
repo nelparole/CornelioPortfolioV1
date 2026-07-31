@@ -4,20 +4,15 @@ const navMenu = document.getElementById('nav-menu'),
     navClose = document.getElementById('nav-close');
 
 if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu');
-    });
+    navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
 }
 if (navClose) {
-    navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu');
-    });
+    navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
 }
 
 const navLink = document.querySelectorAll('.nav__link');
 function linkAction() {
-    const navMenu = document.getElementById('nav-menu');
-    navMenu.classList.remove('show-menu');
+    document.getElementById('nav-menu')?.classList.remove('show-menu');
 }
 navLink.forEach(n => n.addEventListener('click', linkAction));
 
@@ -26,7 +21,7 @@ const skillsContent = document.getElementsByClassName('skills__content'),
     skillsHeader = document.querySelectorAll('.skills__header');
 
 function toggleSkills() {
-    let itemClass = this.parentNode.className;
+    const itemClass = this.parentNode.className;
     for (let i = 0; i < skillsContent.length; i++) {
         skillsContent[i].className = 'skills__content skills__close';
     }
@@ -34,11 +29,9 @@ function toggleSkills() {
         this.parentNode.className = 'skills__content skills__open';
     }
 }
-skillsHeader.forEach((el) => {
-    el.addEventListener('click', toggleSkills);
-});
+skillsHeader.forEach((el) => el.addEventListener('click', toggleSkills));
 
-/*==================== PROFILE CONTENT UPDATES ====================*/
+/*==================== PROFILE AND DESIGN UPDATES ====================*/
 const aboutDescription = document.querySelector('.about__description');
 const aboutInfoTitles = document.querySelectorAll('.about__info-title');
 const aboutInfoNames = document.querySelectorAll('.about__info-name');
@@ -133,6 +126,150 @@ portfolioEnhancementStyles.textContent = `
         overflow: hidden;
     }
 
+    .portfolio__container {
+        max-width: 980px;
+        padding: 1.25rem 3.25rem 4.5rem;
+    }
+
+    .portfolio__container .swiper-wrapper {
+        align-items: stretch;
+    }
+
+    .portfolio__container .swiper-slide {
+        height: auto;
+        padding: 1rem;
+    }
+
+    .portfolio__content {
+        display: grid;
+        grid-template-columns: minmax(260px, .95fr) minmax(280px, 1fr);
+        align-items: stretch;
+        gap: 1.75rem;
+        min-height: 0;
+        height: 100%;
+        padding: 1rem;
+        border: 1px solid rgba(23, 123, 152, .14);
+        border-radius: .85rem;
+        background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(244, 249, 251, .98));
+        box-shadow: 0 18px 45px rgba(14, 36, 49, .09);
+    }
+
+    .portfolio__content > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+        padding: .85rem .5rem .85rem 0;
+    }
+
+    .portfolio__img {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        min-height: 280px;
+        max-height: 360px;
+        margin: 0;
+        border-radius: .65rem;
+        object-fit: cover;
+        object-position: top center;
+        background: rgba(23, 123, 152, .07);
+        box-shadow: inset 0 0 0 1px rgba(23, 123, 152, .12);
+    }
+
+    .portfolio__title {
+        color: var(--first-color-bit-lighter);
+        font-size: 1.45rem;
+        line-height: 1.25;
+        margin-bottom: .65rem;
+    }
+
+    .portfolio__description {
+        color: var(--text-color);
+        font-size: .93rem;
+        line-height: 1.65;
+        margin-bottom: 1rem;
+    }
+
+    .portfolio__tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .45rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .portfolio__tech strong {
+        flex-basis: 100%;
+        color: var(--title-color);
+        font-size: .82rem;
+        margin-bottom: .05rem;
+    }
+
+    .portfolio__tech-chip {
+        border: 1px solid rgba(23, 123, 152, .18);
+        border-radius: 999px;
+        color: var(--first-color-bit-lighter);
+        background: rgba(23, 123, 152, .07);
+        font-size: .76rem;
+        font-weight: var(--font-medium);
+        line-height: 1;
+        padding: .45rem .6rem;
+    }
+
+    .portfolio__btn {
+        align-self: flex-start;
+        border-radius: 999px;
+        background: var(--first-color);
+        color: #fff;
+        font-size: .9rem;
+        padding: .72rem 1rem;
+        box-shadow: 0 12px 24px rgba(23, 123, 152, .18);
+    }
+
+    .portfolio__btn:hover {
+        color: #fff;
+        background: var(--first-color-bit-lighter);
+        transform: translateY(-1px);
+    }
+
+    .portfolio__container .swiper-button-prev,
+    .portfolio__container .swiper-button-next {
+        width: 2.55rem;
+        height: 2.55rem;
+        border: 1px solid rgba(23, 123, 152, .18);
+        background: #fff;
+        color: var(--first-color-bit-lighter);
+        box-shadow: 0 10px 26px rgba(14, 36, 49, .12);
+    }
+
+    .portfolio__container .swiper-button-prev:hover,
+    .portfolio__container .swiper-button-next:hover {
+        color: #fff;
+        background: var(--first-color);
+    }
+
+    .portfolio__container .swiper-button-prev:after,
+    .portfolio__container .swiper-button-next:after {
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    .portfolio .swiper-pagination {
+        margin-top: .35rem;
+    }
+
+    .portfolio .swiper-pagination-bullet {
+        width: .55rem;
+        height: .55rem;
+        opacity: .25;
+        background: var(--first-color-bit-lighter);
+    }
+
+    .portfolio .swiper-pagination-bullet-active {
+        width: 1.65rem;
+        border-radius: 999px;
+        opacity: 1;
+    }
+
     @media screen and (max-width: 767px) {
         .skills__container {
             column-gap: 0;
@@ -140,6 +277,34 @@ portfolioEnhancementStyles.textContent = `
 
         .skills__header .skills__titles {
             font-size: 1.45rem;
+        }
+
+        .portfolio__container {
+            padding: .5rem 1rem 3.5rem;
+        }
+
+        .portfolio__container .swiper-slide {
+            padding: .75rem 0;
+        }
+
+        .portfolio__content {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: .85rem;
+        }
+
+        .portfolio__content > div {
+            padding: .25rem;
+        }
+
+        .portfolio__img {
+            min-height: 210px;
+            max-height: 250px;
+        }
+
+        .portfolio__container .swiper-button-prev,
+        .portfolio__container .swiper-button-next {
+            display: none;
         }
     }
 `;
@@ -161,8 +326,30 @@ if (homeData && !document.querySelector('.home__focus')) {
     homeDescription?.after(focus);
 }
 
+document.querySelectorAll('.portfolio__tech').forEach((tech) => {
+    if (tech.dataset.enhanced === 'true') {
+        return;
+    }
+
+    const strongText = tech.querySelector('strong')?.textContent || 'Tech Used:';
+    const techList = tech.textContent
+        .replace(strongText, '')
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+
+    tech.innerHTML = `<strong>${strongText}</strong>`;
+    techList.forEach((label) => {
+        const chip = document.createElement('span');
+        chip.className = 'portfolio__tech-chip';
+        chip.textContent = label;
+        tech.appendChild(chip);
+    });
+    tech.dataset.enhanced = 'true';
+});
+
 if (aboutDescription) {
-    aboutDescription.textContent = 'Hi, I’m Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I’m passionate about turning raw data into clear insights and reliable data solutions.';
+    aboutDescription.textContent = "Hi, I'm Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I'm passionate about turning raw data into clear insights and reliable data solutions.";
 }
 
 if (aboutInfoTitles[0]) {
@@ -281,15 +468,11 @@ let modal = function (modalClick) {
     modalViews[modalClick].classList.add('active-modal');
 };
 modalBtns.forEach((modalBtn, i) => {
-    modalBtn.addEventListener('click', () => {
-        modal(i);
-    });
+    modalBtn.addEventListener('click', () => modal(i));
 });
 modalCloses.forEach((modalClose) => {
     modalClose.addEventListener('click', () => {
-        modalViews.forEach((modalView) => {
-            modalView.classList.remove('active-modal');
-        });
+        modalViews.forEach((modalView) => modalView.classList.remove('active-modal'));
     });
 });
 
@@ -308,8 +491,6 @@ const swiperPortfolio = new Swiper('.portfolio__container', {
     clickable: true,
   },
 });
-
-
 
 /*==================== TESTIMONIAL SWIPER ====================*/
 let swiperTestimonial = new Swiper('.testimonial__container', {
@@ -336,10 +517,14 @@ function scrollActive() {
         const sectionHeight = current.offsetHeight;
         const sectionTop = current.offsetTop - 50;
         const sectionId = current.getAttribute('id');
+        const link = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+        if (!link) {
+            return;
+        }
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link');
+            link.classList.add('active-link');
         } else {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link');
+            link.classList.remove('active-link');
         }
     });
 }
@@ -359,7 +544,7 @@ function scrollUp() {
 }
 window.addEventListener('scroll', scrollUp);
 
-/*==================== DARK LIGHT THEME ====================*/ 
+/*==================== DARK LIGHT THEME ====================*/
 const themeButton = document.getElementById('theme-button');
 const darkTheme = 'dark-theme';
 const iconTheme = 'uil-sun';
@@ -368,14 +553,16 @@ const selectedIcon = localStorage.getItem('selected-icon');
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
 
-if (selectedTheme) {
+if (themeButton && selectedTheme) {
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
     themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
 }
 
-themeButton.addEventListener('click', () => {
-    document.body.classList.toggle(darkTheme);
-    themeButton.classList.toggle(iconTheme);
-    localStorage.setItem('selected-theme', getCurrentTheme());
-    localStorage.setItem('selected-icon', getCurrentIcon());
-});
+if (themeButton) {
+    themeButton.addEventListener('click', () => {
+        document.body.classList.toggle(darkTheme);
+        themeButton.classList.toggle(iconTheme);
+        localStorage.setItem('selected-theme', getCurrentTheme());
+        localStorage.setItem('selected-icon', getCurrentIcon());
+    });
+}
