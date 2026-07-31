@@ -98,6 +98,23 @@ portfolioEnhancementStyles.textContent = `
         color: var(--portfolio-accent);
     }
 
+    body:not(.dark-theme) .about.section .section__title,
+    body:not(.dark-theme) .about.section .about__info-title {
+        color: #f8fbff !important;
+    }
+
+    body:not(.dark-theme) .about.section .about__description {
+        color: rgba(226, 232, 240, .9);
+    }
+
+    body:not(.dark-theme) .about.section .about__info-name {
+        color: rgba(255, 255, 255, .92);
+    }
+
+    body:not(.dark-theme) .about.section .section__title::after {
+        background: linear-gradient(90deg, rgba(23, 123, 152, .95), rgba(125, 211, 252, .6));
+    }
+
     body:not(.dark-theme) .header {
         transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
     }
