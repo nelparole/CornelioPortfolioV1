@@ -38,6 +38,16 @@ skillsHeader.forEach((el) => {
     el.addEventListener('click', toggleSkills);
 });
 
+/*==================== SKILLS BAR WIDTH ====================*/
+document.querySelectorAll('.skills__data').forEach((skill) => {
+    const number = skill.querySelector('.skills__number');
+    const percentage = skill.querySelector('.skills__percentage');
+
+    if (number && percentage) {
+        percentage.style.width = number.textContent.trim();
+    }
+});
+
 /*==================== SERVICES MODAL ====================*/
 const modalViews = document.querySelectorAll('.services__modal'),
     modalBtns = document.querySelectorAll('.services__button'),
