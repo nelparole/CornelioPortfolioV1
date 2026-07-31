@@ -147,11 +147,11 @@ portfolioEnhancementStyles.textContent = `
         gap: 1.75rem;
         min-height: 0;
         height: 100%;
-        padding: 1rem;
-        border: 1px solid rgba(23, 123, 152, .14);
-        border-radius: .85rem;
-        background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(244, 249, 251, .98));
-        box-shadow: 0 18px 45px rgba(14, 36, 49, .09);
+        padding: 1.1rem;
+        border: 1px solid rgba(148, 163, 184, .24);
+        border-radius: .75rem;
+        background: rgba(255, 255, 255, .96);
+        box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
     }
 
     .portfolio__content > div {
@@ -169,11 +169,12 @@ portfolioEnhancementStyles.textContent = `
         min-height: 280px;
         max-height: 360px;
         margin: 0;
-        border-radius: .65rem;
+        border-radius: .6rem;
         object-fit: cover;
         object-position: top center;
-        background: rgba(23, 123, 152, .07);
-        box-shadow: inset 0 0 0 1px rgba(23, 123, 152, .12);
+        background: #f8fafc;
+        border: 1px solid rgba(148, 163, 184, .18);
+        box-shadow: none;
     }
 
     .portfolio__title {
@@ -217,17 +218,19 @@ portfolioEnhancementStyles.textContent = `
 
     .portfolio__btn {
         align-self: flex-start;
-        border-radius: 999px;
-        background: var(--first-color);
-        color: #fff;
-        font-size: .9rem;
-        padding: .72rem 1rem;
-        box-shadow: 0 12px 24px rgba(23, 123, 152, .18);
+        border: 1px solid rgba(23, 123, 152, .2);
+        border-radius: .65rem;
+        background: rgba(255, 255, 255, .88);
+        color: var(--first-color-bit-lighter);
+        font-size: .88rem;
+        padding: .68rem .9rem;
+        box-shadow: none;
     }
 
     .portfolio__btn:hover {
-        color: #fff;
-        background: var(--first-color-bit-lighter);
+        color: var(--first-color);
+        background: rgba(23, 123, 152, .08);
+        border-color: rgba(23, 123, 152, .32);
         transform: translateY(-1px);
     }
 
@@ -235,10 +238,10 @@ portfolioEnhancementStyles.textContent = `
     .portfolio__container .swiper-button-next {
         width: 2.55rem;
         height: 2.55rem;
-        border: 1px solid rgba(23, 123, 152, .18);
-        background: #fff;
+        border: 1px solid rgba(148, 163, 184, .22);
+        background: rgba(255, 255, 255, .92);
         color: var(--first-color-bit-lighter);
-        box-shadow: 0 10px 26px rgba(14, 36, 49, .12);
+        box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
     }
 
     .portfolio__container .swiper-button-prev:hover,
