@@ -42,6 +42,7 @@ skillsHeader.forEach((el) => {
 const aboutDescription = document.querySelector('.about__description');
 const aboutInfoTitles = document.querySelectorAll('.about__info-title');
 const aboutInfoNames = document.querySelectorAll('.about__info-name');
+const skillsSectionTitles = document.querySelectorAll('.skills__content .skills__titles');
 
 if (aboutDescription) {
     aboutDescription.textContent = 'Hi, I’m Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I’m passionate about turning raw data into clear insights and reliable data solutions.';
@@ -54,6 +55,15 @@ if (aboutInfoTitles[0]) {
 if (aboutInfoNames[1]) {
     aboutInfoNames[1].innerHTML = 'Available to Message<br />';
 }
+
+skillsSectionTitles.forEach((title) => {
+    if (title.textContent.trim() === 'Data Engineering & ETL') {
+        const subtitle = title.parentElement.querySelector('.skills__subtitle');
+        if (subtitle) {
+            subtitle.textContent = 'Less than 3 years';
+        }
+    }
+});
 
 function createSkillData(name, level) {
     const skill = document.createElement('div');
@@ -77,8 +87,11 @@ function addSkillItem(sectionTitle, name, level) {
     section.querySelector('.skills__list')?.appendChild(skill);
 }
 
-function addSkillSection({ title, subtitle, icon, skills }) {
-    const container = document.querySelector('.skills__container > div:last-child');
+function addSkillSection({ title, subtitle, icon, skills, column = 'right' }) {
+    const containerSelector = column === 'left'
+        ? '.skills__container > div:first-child'
+        : '.skills__container > div:last-child';
+    const container = document.querySelector(containerSelector);
     const exists = Array.from(document.querySelectorAll('.skills__content .skills__titles')).some((heading) => heading.textContent.trim() === title);
 
     if (!container || exists) {
@@ -112,6 +125,7 @@ addSkillSection({
     title: 'Geospatial Analytics & Mapping',
     subtitle: 'Mapbox, Power BI Maps & Location-Based Analysis',
     icon: 'uil-map-marker',
+    column: 'left',
     skills: [
         { name: 'Mapbox Map Development for Power BI', level: 70 },
         { name: 'Map-Based Data Analysis', level: 75 },
@@ -123,6 +137,7 @@ addSkillSection({
     title: 'AI-Assisted Development',
     subtitle: 'Codex, Copilot & AI-Enhanced Workflows',
     icon: 'uil-robot',
+    column: 'left',
     skills: [
         { name: 'OpenAI Codex for Development Support', level: 75 },
         { name: 'GitHub Copilot-Assisted Coding', level: 75 },
