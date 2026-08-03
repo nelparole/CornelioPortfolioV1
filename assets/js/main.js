@@ -13,13 +13,14 @@ const baseCoords = [-37.2004, 174.9010];
 let locationMap;
 let routeLine;
 let targetMarker;
+let skillsReady = false;
 
 const style = document.createElement('style');
 style.textContent = `
 body:not(.dark-theme){--ink:#102033;--muted:#667085;--line:#102033}.section__title{color:var(--ink)!important;font-size:clamp(1.85rem,3vw,2.35rem);font-weight:750;letter-spacing:0}.section__title::after{content:'';display:block;width:3.25rem;height:3px;border-radius:999px;background:var(--line);margin:.75rem auto 0}.section__subtitle{color:var(--muted);letter-spacing:0}body.dark-theme .section__title{color:#f8fbff!important}body.dark-theme .section__subtitle{color:#cbd5e1!important}.about.section .section__title,.about.section .about__info-title,.about.section .about__info-name{color:#fff!important}.about.section .about__description{color:#e8eef8!important}
 .nav__link{border-radius:999px;padding:.45rem .75rem;position:relative;transition:color .25s,background .25s,transform .25s}.nav__link::after{content:'';position:absolute;left:50%;bottom:.18rem;width:1.15rem;height:2px;border-radius:999px;background:#38bdf8;opacity:0;transform:translateX(-50%) scaleX(.35);transition:opacity .25s,transform .25s}.nav__link:hover{color:#166a82;background:rgba(22,106,130,.08);transform:translateY(-2px)}.nav__link:hover::after,.nav__link.active-link::after{opacity:1;transform:translateX(-50%) scaleX(1)}body.dark-theme .nav__link:hover{color:#e8f7ff;background:rgba(56,189,248,.12)}.scroll-header{background:rgba(255,255,255,.86);box-shadow:0 8px 28px rgba(15,23,42,.08);backdrop-filter:blur(14px)}body.dark-theme .scroll-header{background:rgba(16,23,38,.86);box-shadow:0 8px 28px rgba(0,0,0,.28)}
 .home__focus{display:flex;flex-wrap:wrap;gap:.55rem;margin:-1rem 0 1.75rem}.home__focus-pill{border:1px solid rgba(16,32,51,.18);border-radius:999px;color:#102033;font-size:var(--smaller-font-size);font-weight:var(--font-medium);padding:.55rem .75rem;background:rgba(16,32,51,.06)}
-.skills.section{overflow:hidden}.skills__container{display:grid!important;grid-template-columns:repeat(2,minmax(300px,1fr))!important;gap:1rem!important;align-items:start!important;max-width:980px!important;margin-inline:auto!important}.skills__container>div{display:contents!important}.skills__content{box-sizing:border-box!important;position:relative!important;display:block!important;width:100%!important;min-width:0!important;min-height:auto!important;height:auto!important;margin:0!important;padding:1.05rem 1.15rem!important;border:1px solid rgba(16,32,51,.12)!important;border-radius:1.15rem!important;background:linear-gradient(145deg,#fff 0%,#f8fcfd 58%,#eef8fb 100%)!important;box-shadow:0 18px 38px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.8)!important;overflow:hidden!important;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.skills__content:hover{border-color:rgba(22,106,130,.3)!important;box-shadow:0 24px 52px rgba(15,23,42,.12),inset 0 1px 0 rgba(255,255,255,.85)!important;transform:translateY(-3px)}.skills__content.skills__open{grid-column:auto!important}.skills__content::before{content:'';position:absolute;right:-4rem;top:-4rem;width:11rem;height:11rem;border-radius:50%;background:radial-gradient(circle,rgba(103,183,200,.18),transparent 68%);pointer-events:none}.skills__content::after{content:'';position:absolute;right:1rem;top:1rem;width:4.2rem;height:4.2rem;border:1px solid rgba(16,32,51,.06);border-radius:1rem;background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(255,255,255,.2));transform:rotate(10deg);pointer-events:none}.skills__header{position:relative;z-index:1;display:grid!important;grid-template-columns:3.25rem minmax(0,1fr) 1.65rem!important;align-items:center!important;gap:1rem!important;text-align:left!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;cursor:pointer}.skills__icon{display:grid!important;place-items:center!important;width:3.25rem!important;height:3.25rem!important;margin:0!important;border-radius:1rem!important;background:#eef9fc!important;color:#0ea5d8!important;font-size:1.8rem!important;box-shadow:inset 0 0 0 1px rgba(14,165,216,.1),0 10px 22px rgba(14,165,216,.1)!important}.skills__header>div{min-width:0!important}.skills__header .skills__titles{display:block!important;color:#102033!important;font-size:1.02rem!important;line-height:1.25!important;margin:0!important;text-align:left!important}.skills__subtitle{display:block!important;max-width:none!important;color:#667085!important;font-size:.8rem!important;line-height:1.45!important;text-align:left!important;margin:.22rem 0 0!important}.skills__arrow{position:static!important;justify-self:end!important;margin:0!important;color:#102033!important;font-size:1.4rem!important;transition:transform .25s}.skills__open .skills__arrow{transform:rotate(180deg)!important}.skills__list{position:relative!important;z-index:1!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;box-sizing:border-box!important;float:none!important;clear:both!important;width:100%!important;max-width:none!important;height:auto!important;margin:0!important;padding:0!important;transform:none!important;overflow:visible!important}.skills__close .skills__list{display:none!important;height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}.skills__open .skills__list{display:grid!important;grid-template-columns:1fr!important;gap:.85rem!important;margin-top:1rem!important;padding:1rem 0 0!important;border-top:1px solid rgba(16,32,51,.08)!important}.skills__data{display:block!important;width:100%!important;min-width:0!important;max-width:none!important;margin:0!important}.skills__data .skills__titles{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:1rem!important;margin:0 0 .45rem!important}.skills__name{color:#166a82!important;font-size:.86rem!important;font-weight:650!important;line-height:1.35!important;max-width:calc(100% - 4rem)!important;margin:0!important}.skills__number{color:#667085!important;font-size:.8rem!important;white-space:nowrap!important}.skills__bar{display:block!important;width:100%!important;height:.28rem!important;border-radius:999px!important;overflow:hidden!important;background:#dbe7f0!important}.skills__percentage{display:block!important;height:100%!important;border-radius:999px!important;background:linear-gradient(90deg,#102033,#1e88a5,#9fb6ff)!important}body.dark-theme .skills__content{border-color:rgba(125,211,252,.14)!important;background:linear-gradient(145deg,#111827,#0f172a 62%,#0b3144)!important}body.dark-theme .skills__header .skills__titles,body.dark-theme .skills__name{color:#f8fbff!important}body.dark-theme .skills__icon{background:rgba(56,189,248,.12)!important;color:#7dd3fc!important}body.dark-theme .skills__subtitle,body.dark-theme .skills__number{color:#cbd5e1!important}body.dark-theme .skills__arrow{color:#e8eef8!important}body.dark-theme .skills__bar{background:rgba(148,163,184,.28)!important}body.dark-theme .skills__percentage{background:linear-gradient(90deg,#38bdf8,#a5b4fc)!important}
+.skills.section{overflow:hidden!important}.skills__container{display:grid!important;grid-template-columns:repeat(2,minmax(300px,1fr))!important;gap:1rem!important;align-items:start!important;max-width:980px!important;margin-inline:auto!important}.skills__container>div{display:contents!important}.skills__content{box-sizing:border-box!important;position:relative!important;display:block!important;width:100%!important;min-width:0!important;min-height:auto!important;height:auto!important;margin:0!important;padding:1.05rem 1.15rem!important;border:1px solid rgba(16,32,51,.12)!important;border-radius:1.15rem!important;background:linear-gradient(145deg,#fff 0%,#f8fcfd 58%,#eef8fb 100%)!important;box-shadow:0 18px 38px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.8)!important;overflow:hidden!important;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.skills__content:hover{border-color:rgba(22,106,130,.3)!important;box-shadow:0 24px 52px rgba(15,23,42,.12),inset 0 1px 0 rgba(255,255,255,.85)!important;transform:translateY(-3px)}.skills__content.skills__open{grid-column:auto!important}.skills__content::before{content:'';position:absolute;right:-4rem;top:-4rem;width:11rem;height:11rem;border-radius:50%;background:radial-gradient(circle,rgba(103,183,200,.18),transparent 68%);pointer-events:none}.skills__content::after{content:'';position:absolute;right:1rem;top:1rem;width:4.2rem;height:4.2rem;border:1px solid rgba(16,32,51,.06);border-radius:1rem;background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(255,255,255,.2));transform:rotate(10deg);pointer-events:none}.skills__header{position:relative;z-index:1;display:grid!important;grid-template-columns:3.25rem minmax(0,1fr) 1.65rem!important;align-items:center!important;gap:1rem!important;text-align:left!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;cursor:pointer}.skills__icon{display:grid!important;place-items:center!important;width:3.25rem!important;height:3.25rem!important;margin:0!important;border-radius:1rem!important;background:#eef9fc!important;color:#0ea5d8!important;font-size:1.8rem!important;box-shadow:inset 0 0 0 1px rgba(14,165,216,.1),0 10px 22px rgba(14,165,216,.1)!important}.skills__header>div{min-width:0!important}.skills__header .skills__titles{display:block!important;color:#102033!important;font-size:1.02rem!important;line-height:1.25!important;margin:0!important;text-align:left!important}.skills__subtitle{display:block!important;max-width:none!important;color:#667085!important;font-size:.8rem!important;line-height:1.45!important;text-align:left!important;margin:.22rem 0 0!important}.skills__arrow{position:static!important;justify-self:end!important;margin:0!important;color:#102033!important;font-size:1.4rem!important;transition:transform .25s}.skills__open .skills__arrow{transform:rotate(180deg)!important}.skills__list{position:relative!important;z-index:1!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;box-sizing:border-box!important;float:none!important;clear:both!important;width:100%!important;max-width:none!important;height:auto!important;margin:0!important;padding:0!important;transform:none!important;overflow:visible!important}.skills__close .skills__list{display:none!important;height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}.skills__open .skills__list{display:grid!important;grid-template-columns:1fr!important;gap:.85rem!important;margin-top:1rem!important;padding:1rem 0 0!important;border-top:1px solid rgba(16,32,51,.08)!important}.skills__data{display:block!important;width:100%!important;min-width:0!important;max-width:none!important;margin:0!important}.skills__data .skills__titles{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:1rem!important;margin:0 0 .45rem!important}.skills__name{color:#166a82!important;font-size:.86rem!important;font-weight:650!important;line-height:1.35!important;max-width:calc(100% - 4rem)!important;margin:0!important}.skills__number{color:#667085!important;font-size:.8rem!important;white-space:nowrap!important}.skills__bar{display:block!important;width:100%!important;height:.28rem!important;border-radius:999px!important;overflow:hidden!important;background:#dbe7f0!important}.skills__percentage{display:block!important;height:100%!important;border-radius:999px!important;background:linear-gradient(90deg,#102033,#1e88a5,#9fb6ff)!important}body.dark-theme .skills__content{border-color:rgba(125,211,252,.14)!important;background:linear-gradient(145deg,#111827,#0f172a 62%,#0b3144)!important}body.dark-theme .skills__header .skills__titles,body.dark-theme .skills__name{color:#f8fbff!important}body.dark-theme .skills__icon{background:rgba(56,189,248,.12)!important;color:#7dd3fc!important}body.dark-theme .skills__subtitle,body.dark-theme .skills__number{color:#cbd5e1!important}body.dark-theme .skills__arrow{color:#e8eef8!important}body.dark-theme .skills__bar{background:rgba(148,163,184,.28)!important}body.dark-theme .skills__percentage{background:linear-gradient(90deg,#38bdf8,#a5b4fc)!important}
 .portfolio{overflow:hidden}.portfolio__container{max-width:1080px;padding:1rem 4rem 4.5rem;overflow:visible;perspective:1300px}.portfolio__content{position:relative;display:grid!important;grid-template-columns:minmax(280px,.9fr) minmax(280px,1.1fr)!important;align-items:center;gap:2rem;min-height:430px;padding:2rem;border:1px solid rgba(255,255,255,.14);border-radius:1.65rem;background:radial-gradient(circle at 20% 10%,rgba(103,183,200,.34),transparent 28%),linear-gradient(135deg,#0f172a 0%,#123247 52%,#166a82 100%);box-shadow:0 32px 80px rgba(15,23,42,.24);overflow:visible;transform:rotateX(4deg) rotateY(-5deg);transition:transform .45s,box-shadow .45s}.portfolio__content:hover{transform:translateY(-6px);box-shadow:0 38px 92px rgba(15,23,42,.3)}.portfolio__content::before{content:'';position:absolute;right:2rem;bottom:2rem;width:10rem;height:10rem;border:1px solid rgba(255,255,255,.14);border-radius:2rem;background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.04));transform:rotate(10deg);pointer-events:none}.portfolio__content>div{display:flex;flex-direction:column;justify-content:center;min-width:0;order:1;z-index:1}.portfolio__img{order:2;width:min(100%,460px);height:300px;margin:0 0 0 auto;border:8px solid rgba(255,255,255,.9);border-radius:1.15rem;object-fit:cover;object-position:top center;box-shadow:0 26px 58px rgba(0,0,0,.28);z-index:1}.portfolio__title{color:#fff!important;font-size:clamp(1.9rem,3.4vw,2.75rem);line-height:1.1}.portfolio__description{color:#dbeafe!important;max-width:34rem;font-size:.95rem;line-height:1.68}.portfolio__tech{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.35rem}.portfolio__tech strong{flex-basis:100%;color:#8bd9ee!important;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}.portfolio__tech-chip{border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#e8f7ff!important;background:rgba(255,255,255,.08);font-size:.74rem;font-weight:650;padding:.45rem .65rem}.portfolio__btn{display:inline-flex;align-items:center;gap:.45rem;align-self:flex-start;border:1px solid rgba(255,255,255,.18);border-radius:.8rem;background:#fff;color:#102033!important;font-weight:750;padding:.85rem 1.1rem;box-shadow:0 14px 28px rgba(0,0,0,.14)}.portfolio__container .swiper-button-prev,.portfolio__container .swiper-button-next{display:none!important}.portfolio>.swiper-pagination,.portfolio .swiper-pagination.swiper-pagination-horizontal,.portfolio .swiper-pagination.swiper-pagination-vertical{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;width:max-content!important;height:auto!important;margin:1.1rem auto 0!important;gap:.65rem!important;padding:.52rem .72rem!important;border:1px solid rgba(16,32,51,.08);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 14px 34px rgba(15,23,42,.1);transform:none!important}.portfolio .swiper-pagination-bullet{display:block!important;width:.7rem!important;height:.7rem!important;margin:0!important;border:1px solid rgba(22,106,130,.3);border-radius:999px;opacity:1!important;background:#c9dce2}.portfolio .swiper-pagination-bullet-active{width:2.35rem!important;background:#102033!important}
 .tour-swiper .swiper-pagination,.tour-swiper .swiper-pagination.swiper-pagination-hidden,.tour-swiper .swiper-pagination.swiper-pagination-lock{position:absolute!important;right:1.5rem!important;top:50%!important;left:auto!important;bottom:auto!important;display:flex!important;flex-direction:column!important;gap:.7rem;padding:.65rem .45rem;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(15,23,42,.42);box-shadow:0 18px 38px rgba(0,0,0,.2);backdrop-filter:blur(14px);transform:translateY(-50%)!important;opacity:1!important;visibility:visible!important;z-index:20}.tour-swiper .swiper-pagination-bullet{display:block!important;width:.72rem;height:.72rem;margin:0!important;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.36);opacity:1!important;visibility:visible!important}.tour-swiper .swiper-pagination-bullet-active{height:2rem;background:linear-gradient(180deg,#38bdf8,#177b98)}
 .contact.section{padding-bottom:5rem}.contact__container{position:relative;display:grid!important;grid-template-columns:minmax(250px,.86fr) minmax(380px,1.14fr)!important;gap:0;max-width:940px;border:1px solid rgba(16,32,51,.1);border-radius:1.35rem;background:linear-gradient(135deg,#102033,#123247 55%,#166a82);box-shadow:0 26px 68px rgba(15,23,42,.14);padding:.65rem!important;overflow:hidden}.contact__info-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:29rem;color:#fff;padding:2rem;overflow:hidden}.contact__info-title{color:#fff;font-size:1.25rem;margin-bottom:.45rem}.contact__info-subtitle{color:rgba(232,247,255,.82);font-size:.86rem;line-height:1.6;margin-bottom:1.8rem}.contact__info-list{display:grid;gap:1.05rem}.contact__info-item{display:grid;grid-template-columns:2.1rem 1fr;align-items:start;gap:.75rem;color:rgba(232,247,255,.88);font-size:.8rem;line-height:1.55}.contact__info-item i{display:inline-flex;align-items:center;justify-content:center;width:2.1rem;height:2.1rem;border-radius:.7rem;background:rgba(255,255,255,.1);color:#8bd9ee}.contact__body{position:relative;margin-left:.25rem;border-radius:1rem;background:rgba(255,255,255,.96);padding:2.15rem 2.35rem}.contact__title{color:#102033!important;font-size:1.18rem;text-align:left}.contact__description{color:#617083!important;font-size:.9rem;text-align:left}.contact__container .progressbar{display:none!important}.contact__container .wizard__choices{display:flex!important;justify-content:center!important;padding:1.25rem 0 0}.wizard__btn{display:inline-flex;align-items:center;justify-content:center;gap:.85rem;min-height:3.55rem;padding:.85rem 1.15rem;border:1px solid rgba(16,32,51,.1);border-radius:.8rem;background:#fff;color:#102033;font-weight:700;box-shadow:0 10px 28px rgba(15,23,42,.06)}.wizard__btn i{display:inline-flex;align-items:center;justify-content:center;width:2.05rem;height:2.05rem;border-radius:.65rem;background:#eef7fa;color:#166a82}.contact__message-btn{width:auto!important;min-width:13rem!important;border-radius:999px!important;background:#102033!important;color:#fff!important}.contact__message-btn i{border-radius:999px!important;background:rgba(255,255,255,.12)!important;color:#8bd9ee!important}.wizard__btn.primary{background:#102033;color:#fff}
@@ -29,12 +30,56 @@ body.dark-theme .portfolio__content{background:radial-gradient(circle at 20% 10%
 `;
 document.head.appendChild(style);
 
+function setImportant(el, prop, value) {
+  if (el) el.style.setProperty(prop, value, 'important');
+}
 function setSkillWidths() {
   $$('.skills__data').forEach((data) => {
     const number = $('.skills__number', data)?.textContent.trim();
     const bar = $('.skills__percentage', data);
     if (number && bar) bar.style.width = number;
   });
+}
+function lockSkillsLayout() {
+  const container = $('.skills__container');
+  if (!container) return;
+  setImportant(container, 'display', 'grid');
+  setImportant(container, 'grid-template-columns', window.innerWidth <= 900 ? '1fr' : 'repeat(2, minmax(300px, 1fr))');
+  setImportant(container, 'align-items', 'start');
+  setImportant(container, 'gap', '1rem');
+  $$('.skills__container > div').forEach((wrapper) => setImportant(wrapper, 'display', 'contents'));
+  $$('.skills__content', container).forEach((card) => {
+    setImportant(card, 'grid-column', 'auto');
+    setImportant(card, 'display', 'block');
+    setImportant(card, 'position', 'relative');
+    setImportant(card, 'width', '100%');
+    setImportant(card, 'overflow', 'hidden');
+    const list = $('.skills__list', card);
+    if (!list) return;
+    setImportant(list, 'position', 'relative');
+    setImportant(list, 'left', 'auto');
+    setImportant(list, 'right', 'auto');
+    setImportant(list, 'top', 'auto');
+    setImportant(list, 'bottom', 'auto');
+    setImportant(list, 'float', 'none');
+    setImportant(list, 'clear', 'both');
+    setImportant(list, 'width', '100%');
+    setImportant(list, 'max-width', 'none');
+    setImportant(list, 'transform', 'none');
+    setImportant(list, 'grid-template-columns', '1fr');
+    if (card.classList.contains('skills__open')) {
+      setImportant(list, 'display', 'grid');
+      setImportant(list, 'margin', '1rem 0 0');
+      setImportant(list, 'padding', '1rem 0 0');
+      setImportant(list, 'height', 'auto');
+    } else {
+      setImportant(list, 'display', 'none');
+      setImportant(list, 'margin', '0');
+      setImportant(list, 'padding', '0');
+      setImportant(list, 'height', '0');
+    }
+  });
+  setSkillWidths();
 }
 
 function addSkillItem(sectionTitle, name, level) {
@@ -46,7 +91,6 @@ function addSkillItem(sectionTitle, name, level) {
   skill.innerHTML = `<div class="skills__titles"><h3 class="skills__name">${name}</h3><span class="skills__number">${level}%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div>`;
   $('.skills__list', section)?.appendChild(skill);
 }
-
 function addGeoSkill() {
   const container = $('.skills__container');
   if (!container || $$('.skills__titles').some((title) => title.textContent.trim() === 'Geospatial Analytics & Mapping')) return;
@@ -55,46 +99,39 @@ function addGeoSkill() {
   section.innerHTML = `<div class="skills__header"><i class="uil uil-map-marker skills__icon"></i><div><h1 class="skills__titles">Geospatial Analytics & Mapping</h1><span class="skills__subtitle">Mapbox, Power BI Maps & Location-Based Analysis</span></div><i class="uil uil-angle-down skills__arrow"></i></div><div class="skills__list grid"><div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Mapbox Map Development for Power BI</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div><div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Map-Based Data Analysis</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div><div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Geospatial Data Visualization</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage"></span></div></div></div>`;
   container.appendChild(section);
 }
-
 function normalizeSkills() {
   const container = $('.skills__container');
   if (!container) return;
-  $$('.skills__content', container).forEach((card, index) => {
-    if (card.parentElement !== container) container.appendChild(card);
+  const currentOpenTitle = $('.skills__content.skills__open .skills__header .skills__titles', container)?.textContent.trim();
+  const cards = $$('.skills__content', container);
+  const targetOpen = currentOpenTitle || $('.skills__header .skills__titles', cards[0])?.textContent.trim();
+  cards.forEach((card) => {
+    const title = $('.skills__header .skills__titles', card)?.textContent.trim();
     card.classList.remove('skills__open', 'skills__close');
-    card.classList.add(index === 0 ? 'skills__open' : 'skills__close');
-    card.style.gridColumn = 'auto';
-    card.style.position = 'relative';
-    card.style.overflow = 'hidden';
-    const list = $('.skills__list', card);
-    if (list) {
-      list.style.position = 'relative';
-      list.style.left = 'auto';
-      list.style.right = 'auto';
-      list.style.top = 'auto';
-      list.style.bottom = 'auto';
-      list.style.width = '100%';
-      list.style.maxWidth = 'none';
-      list.style.gridTemplateColumns = '1fr';
-    }
+    card.classList.add(title === targetOpen ? 'skills__open' : 'skills__close');
   });
-  $$('.skills__header', container).forEach((header) => {
-    header.onclick = () => {
-      const card = header.closest('.skills__content');
-      const wasOpen = card.classList.contains('skills__open');
-      $$('.skills__content', container).forEach((item) => {
-        item.classList.remove('skills__open');
-        item.classList.add('skills__close');
+  if (!skillsReady) {
+    $$('.skills__header', container).forEach((header) => {
+      header.addEventListener('click', () => {
+        const card = header.closest('.skills__content');
+        const wasOpen = card.classList.contains('skills__open');
+        $$('.skills__content', container).forEach((item) => {
+          item.classList.remove('skills__open');
+          item.classList.add('skills__close');
+        });
+        if (!wasOpen) {
+          card.classList.remove('skills__close');
+          card.classList.add('skills__open');
+        }
+        requestAnimationFrame(lockSkillsLayout);
+        setTimeout(lockSkillsLayout, 40);
+        setTimeout(lockSkillsLayout, 350);
       });
-      if (!wasOpen) {
-        card.classList.remove('skills__close');
-        card.classList.add('skills__open');
-      }
-      setSkillWidths();
-    };
-  });
+    });
+    skillsReady = true;
+  }
+  lockSkillsLayout();
 }
-
 function updateText() {
   const homeDesc = $('.home__description');
   const homeData = $('.home__data');
@@ -120,7 +157,6 @@ function updateText() {
     if (subtitle.textContent.includes('Less than 2 years')) subtitle.textContent = 'Less than 3 years';
   });
 }
-
 function removeAIText() {
   $$('.skills__content').forEach((card) => {
     const text = card.textContent.toLowerCase();
@@ -130,21 +166,16 @@ function removeAIText() {
     el.textContent = el.textContent.replace(/AI-assisted workflows that turn raw data into reliable insights\.?/gi, '').replace(/Codex, Copilot & AI-Enhanced Workflows/gi, 'Modern development workflows');
   });
 }
-
 function enhanceSkills() {
   addSkillItem('Data Engineering & ETL', 'KNIME Analytics Platform', 70);
   addSkillItem('Business Intelligence & Reporting', 'DAX Measures & Calculations', 75);
   addGeoSkill();
   removeAIText();
   normalizeSkills();
-  setSkillWidths();
 }
 
 function openContactForm() {
-  if (typeof goToForm === 'function') {
-    goToForm('General Message');
-    return;
-  }
+  if (typeof goToForm === 'function') return goToForm('General Message');
   const step1 = $('#step1');
   const step2 = $('#step2');
   const subject = $('#subjectField');
@@ -152,7 +183,6 @@ function openContactForm() {
   if (step2) step2.style.display = 'block';
   if (subject) subject.value = 'General Message';
 }
-
 function enhanceContact() {
   const step1 = $('#step1');
   if (step1 && step1.dataset.simple !== 'true') {
@@ -172,7 +202,6 @@ function enhanceContact() {
     contact.prepend(info);
   }
 }
-
 function addLocationNav() {
   const list = $('.nav__list');
   if (!list || $('.nav__link[href="#location"]')) return;
@@ -182,11 +211,9 @@ function addLocationNav() {
   list.appendChild(item);
   $('.nav__link', item)?.addEventListener('click', closeMenu);
 }
-
 function nzVisual() {
   return '<div class="location__nz-svg" role="img" aria-label="Stylized map of New Zealand with Pukekohe marker"><span class="location__island location__island--north"></span><span class="location__island location__island--south"></span><span class="location__pin"></span></div>';
 }
-
 function ensureLocation() {
   addLocationNav();
   let location = $('#location');
@@ -201,18 +228,12 @@ function ensureLocation() {
     if (about && about.nextElementSibling !== location) about.after(location);
     const visual = $('.location__nz-visual', location);
     if (visual) visual.innerHTML = nzVisual();
-    if (!$('#targetAddress', location)) {
-      $('#aucklandMap', location)?.insertAdjacentHTML('beforebegin', `<div class="location__route-panel"><label class="location__route-label" for="targetAddress">Check distance from Pukekohe</label><div class="location__route-row"><input id="targetAddress" class="location__route-input" placeholder="Enter company address or suburb"><button id="routeBtn" class="location__route-button" type="button">Check</button></div><p id="routeResult" class="location__route-result">Enter an address to estimate route distance and drive time.</p></div>`);
-    }
+    if (!$('#targetAddress', location)) $('#aucklandMap', location)?.insertAdjacentHTML('beforebegin', `<div class="location__route-panel"><label class="location__route-label" for="targetAddress">Check distance from Pukekohe</label><div class="location__route-row"><input id="targetAddress" class="location__route-input" placeholder="Enter company address or suburb"><button id="routeBtn" class="location__route-button" type="button">Check</button></div><p id="routeResult" class="location__route-result">Enter an address to estimate route distance and drive time.</p></div>`);
   }
   loadLeaflet(initMap);
 }
-
 function loadLeaflet(callback) {
-  if (typeof L !== 'undefined') {
-    callback();
-    return;
-  }
+  if (typeof L !== 'undefined') return callback();
   if (!$('link[data-leaflet]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -228,7 +249,6 @@ function loadLeaflet(callback) {
     document.body.appendChild(script);
   }
 }
-
 function initMap() {
   const mapEl = $('#aucklandMap');
   if (!mapEl || mapEl.dataset.ready === 'true' || typeof L === 'undefined') return;
@@ -239,10 +259,7 @@ function initMap() {
   setTimeout(() => locationMap.invalidateSize(), 250);
   initRoutePlanner();
 }
-
-function formatKm(meters) {
-  return `${(meters / 1000).toFixed(meters > 95000 ? 0 : 1)} km`;
-}
+function formatKm(meters) { return `${(meters / 1000).toFixed(meters > 95000 ? 0 : 1)} km`; }
 function formatDuration(seconds) {
   const mins = Math.max(5, Math.round(seconds / 60));
   if (mins < 60) return `${mins} min`;
@@ -281,10 +298,7 @@ function initRoutePlanner() {
   if (!input || !button || !result || button.dataset.ready === 'true') return;
   const run = async () => {
     const query = input.value.trim();
-    if (!query) {
-      result.textContent = 'Please enter a company address, suburb, or town in New Zealand.';
-      return;
-    }
+    if (!query) return result.textContent = 'Please enter a company address, suburb, or town in New Zealand.';
     button.disabled = true;
     button.textContent = 'Checking...';
     result.textContent = 'Searching address and building route...';
@@ -304,7 +318,6 @@ function initRoutePlanner() {
   input.addEventListener('keydown', (event) => { if (event.key === 'Enter') run(); });
   button.dataset.ready = 'true';
 }
-
 async function updateWeather() {
   try {
     const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-37.2004&longitude=174.9010&current=temperature_2m,apparent_temperature,wind_speed_10m,relative_humidity_2m,weather_code&timezone=Pacific%2FAuckland');
@@ -322,7 +335,6 @@ async function updateWeather() {
     if (updated) updated.textContent = 'Weather is unavailable right now.';
   }
 }
-
 function enhancePortfolio() {
   $$('.portfolio__tech').forEach((tech) => {
     if (tech.dataset.chips) return;
@@ -336,7 +348,6 @@ function enhancePortfolio() {
     new Swiper('.tour-swiper', { slidesPerView: 1, loop: false, pagination: { el: '.tour-swiper .swiper-pagination', clickable: true }, navigation: { nextEl: '.tour-swiper .swiper-button-next', prevEl: '.tour-swiper .swiper-button-prev' } });
   } catch {}
 }
-
 function scrollActive() {
   const y = window.pageYOffset;
   $$('section[id]').forEach((section) => {
@@ -346,12 +357,8 @@ function scrollActive() {
     if (link) link.classList.toggle('active-link', y > top && y <= top + height);
   });
 }
-function scrollHeader() {
-  $('#header')?.classList.toggle('scroll-header', window.scrollY >= 80);
-}
-function scrollUp() {
-  $('#scroll-up')?.classList.toggle('show-scroll', window.scrollY >= 560);
-}
+function scrollHeader() { $('#header')?.classList.toggle('scroll-header', window.scrollY >= 80); }
+function scrollUp() { $('#scroll-up')?.classList.toggle('show-scroll', window.scrollY >= 560); }
 
 const themeButton = $('#theme-button');
 const selectedTheme = localStorage.getItem('selected-theme');
@@ -366,7 +373,6 @@ themeButton?.addEventListener('click', () => {
   localStorage.setItem('selected-theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
   localStorage.setItem('selected-icon', themeButton.classList.contains('uil-sun') ? 'uil-moon' : 'uil-sun');
 });
-
 function boot() {
   updateText();
   enhanceSkills();
@@ -377,12 +383,17 @@ function boot() {
   scrollActive();
   scrollHeader();
   scrollUp();
+  lockSkillsLayout();
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
 else boot();
 setTimeout(boot, 400);
 setTimeout(boot, 1400);
+setTimeout(lockSkillsLayout, 2200);
+setTimeout(lockSkillsLayout, 3600);
+setInterval(lockSkillsLayout, 750);
 setInterval(updateWeather, 600000);
+window.addEventListener('resize', lockSkillsLayout);
 window.addEventListener('scroll', scrollActive);
 window.addEventListener('scroll', scrollHeader);
 window.addEventListener('scroll', scrollUp);
