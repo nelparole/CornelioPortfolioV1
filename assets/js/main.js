@@ -640,6 +640,110 @@ portfolioEnhancementStyles.textContent = `
     }
 
     @media screen and (max-width: 767px) {
+        .nav__menu {
+            left: 50%;
+            right: auto;
+            bottom: -110%;
+            width: min(94vw, 28rem);
+            max-height: 72vh;
+            overflow-y: auto;
+            padding: 3.25rem 1.25rem 2rem;
+            border-radius: 1.25rem 1.25rem 0 0;
+            box-shadow: 0 -18px 42px rgba(15, 23, 42, .16);
+            transform: translateX(-50%);
+        }
+
+        .nav__menu.show-menu {
+            bottom: 0;
+        }
+
+        .nav__menu::before {
+            content: '';
+            position: absolute;
+            top: .85rem;
+            left: 50%;
+            width: 2.75rem;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(100, 116, 139, .28);
+            transform: translateX(-50%);
+        }
+
+        .nav__close {
+            top: .75rem;
+            right: .9rem;
+            bottom: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 999px;
+            background: rgba(23, 123, 152, .08);
+            color: var(--portfolio-ink, #172033);
+            font-size: 1.15rem;
+            transition: background .25s ease, color .25s ease, transform .25s ease;
+        }
+
+        .nav__close:hover {
+            background: var(--portfolio-ink, #172033);
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        body.dark-theme .nav__menu {
+            background: rgba(16, 23, 38, .98);
+            box-shadow: 0 -18px 42px rgba(0, 0, 0, .36);
+        }
+
+        body.dark-theme .nav__menu::before {
+            background: rgba(203, 213, 225, .28);
+        }
+
+        body.dark-theme .nav__close {
+            background: rgba(56, 189, 248, .12);
+            color: #e8f7ff;
+        }
+
+        body.dark-theme .nav__close:hover {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        .wizard__choices {
+            grid-template-columns: 1fr;
+            width: min(100%, 22rem);
+            max-width: 22rem;
+            gap: .75rem;
+            padding: 1rem 0 0;
+            margin-top: 1.25rem;
+        }
+
+        .wizard__btn {
+            width: 100%;
+            min-height: 3.55rem;
+            justify-content: flex-start;
+            padding: .75rem .85rem;
+            white-space: normal;
+            text-align: left;
+        }
+
+        .wizard__btn span {
+            display: block;
+            min-width: 0;
+            line-height: 1.2;
+        }
+    }
+
+    @media screen and (min-width: 600px) and (max-width: 767px) {
+        .wizard__choices {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            width: min(100%, 38rem);
+            max-width: 38rem;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
         .skills__container {
             column-gap: 0;
         }
