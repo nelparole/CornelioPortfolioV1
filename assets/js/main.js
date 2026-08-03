@@ -493,7 +493,9 @@ portfolioEnhancementStyles.textContent = `
         background: #172033;
     }
 
-    .tour-swiper .swiper-pagination {
+    .tour-swiper .swiper-pagination,
+    .tour-swiper .swiper-pagination.swiper-pagination-hidden,
+    .tour-swiper .swiper-pagination.swiper-pagination-lock {
         position: absolute !important;
         right: 1.5rem !important;
         top: 50% !important;
@@ -510,17 +512,21 @@ portfolioEnhancementStyles.textContent = `
         box-shadow: 0 18px 38px rgba(0, 0, 0, .2);
         backdrop-filter: blur(14px);
         transform: translateY(-50%) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
         z-index: 20;
     }
 
     .tour-swiper .swiper-pagination-bullet {
+        display: block !important;
         width: .72rem;
         height: .72rem;
         margin: 0 !important;
         border: 2px solid rgba(255, 255, 255, .9);
         border-radius: 999px;
         background: rgba(255, 255, 255, .36);
-        opacity: 1;
+        opacity: 1 !important;
+        visibility: visible !important;
         box-shadow: 0 0 0 2px rgba(15, 23, 42, .16);
         transition: width .25s ease, height .25s ease, background .25s ease, transform .25s ease;
     }
@@ -911,7 +917,9 @@ portfolioEnhancementStyles.textContent = `
             margin-top: -.75rem;
         }
 
-        .tour-swiper .swiper-pagination {
+        .tour-swiper .swiper-pagination,
+        .tour-swiper .swiper-pagination.swiper-pagination-hidden,
+        .tour-swiper .swiper-pagination.swiper-pagination-lock {
             right: .85rem !important;
             padding: .5rem .34rem;
         }
