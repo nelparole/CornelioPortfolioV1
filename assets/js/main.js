@@ -103,6 +103,7 @@ styles.textContent = `
     .location__eyebrow { display: inline-flex; width: fit-content; border: 1px solid rgba(22,106,130,.14); border-radius: 999px; background: #edf7fa; color: #166a82; font-size: .7rem; font-weight: 750; letter-spacing: .08em; padding: .42rem .64rem; text-transform: uppercase; }
     .location__panel h3, .location__map-card h3 { color: #102033; font-size: 1.42rem; line-height: 1.2; margin: .85rem 0 .5rem; }
     .location__panel p, .location__updated { color: #667085; font-size: .88rem; line-height: 1.65; margin: 0; }
+    .location__map-credit { color: #8a98aa; font-size: .7rem; margin-top: .4rem; }
     .location__nz-visual { position: relative; height: 13rem; margin: 1rem 0; border: 1px solid rgba(22,106,130,.12); border-radius: 1rem; background: linear-gradient(145deg, #e9f7fb, #ffffff); overflow: hidden; }
     .location__nz-svg { position: absolute; inset: .75rem; width: calc(100% - 1.5rem); height: calc(100% - 1.5rem); }
     .location__nz-land { fill: url(#nzLandGradient); filter: drop-shadow(0 18px 18px rgba(8,47,73,.34)); }
@@ -119,8 +120,55 @@ styles.textContent = `
     body.dark-theme .location__panel, body.dark-theme .location__map-card { border-color: rgba(125,211,252,.14); background: linear-gradient(180deg, rgba(17,24,39,.98), rgba(15,23,42,.96)); color: #e8eef8; box-shadow: 0 24px 60px rgba(0,0,0,.24); }
     body.dark-theme .location__panel h3, body.dark-theme .location__map-card h3, body.dark-theme .location__weather-card strong { color: #f8fbff; }
     body.dark-theme .location__panel p, body.dark-theme .location__updated, body.dark-theme .location__weather-card span { color: #cbd5e1; }
+    body.dark-theme .location__map-credit { color: #94a3b8; }
     body.dark-theme .location__nz-visual, body.dark-theme .location__weather-card { border-color: rgba(125,211,252,.16); background: rgba(30,41,59,.62); }
     body.dark-theme .location__map { border-color: rgba(125,211,252,.16); background: #0f172a; }
+    @keyframes locationFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes markerPulse { 0%, 100% { box-shadow: 0 0 0 .45rem rgba(239,68,68,.16); } 50% { box-shadow: 0 0 0 .85rem rgba(239,68,68,.08); } }
+    .portfolio__container { max-width: 1040px; padding: 1rem 3.75rem 4rem; }
+    .portfolio__content { grid-template-columns: 1fr; gap: 0; min-height: auto; padding: 0; border: 0; border-radius: 1.6rem; background: #102033; box-shadow: 0 26px 70px rgba(15,23,42,.16); overflow: hidden; }
+    .portfolio__content::before { inset: 0; width: 100%; height: 8px; border-radius: 0; background: linear-gradient(90deg, #166a82, #67b7c8, #d9a441); }
+    .portfolio__content::after { right: -12rem; top: -12rem; width: 28rem; height: 28rem; background: radial-gradient(circle, rgba(103,183,200,.2), transparent 64%); }
+    .portfolio__img { order: 1; width: 100%; height: clamp(260px, 34vw, 390px); margin: 0; border: 0; border-radius: 0; box-shadow: none; object-position: top center; opacity: .92; }
+    .portfolio__content > div { order: 2; display: grid; grid-template-columns: minmax(240px, 1fr) auto; align-items: end; gap: 1.25rem 2rem; padding: 2rem 2.25rem 2.25rem; background: linear-gradient(180deg, rgba(16,32,51,.94), #102033); }
+    .portfolio__title { color: #fff !important; font-size: clamp(1.65rem, 3vw, 2.35rem); margin-bottom: .55rem; }
+    .portfolio__description { color: #d7e5ec !important; max-width: 34rem; font-size: .94rem; line-height: 1.65; margin-bottom: 0; }
+    .portfolio__tech { grid-column: 1 / -1; order: 3; margin: .15rem 0 0; }
+    .portfolio__tech strong { color: #8bd9ee !important; }
+    .portfolio__tech-chip { border-color: rgba(255,255,255,.14); color: #e8f7ff !important; background: rgba(255,255,255,.08); }
+    .portfolio__btn { grid-column: 2; grid-row: 1 / span 2; align-self: end; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: #ffffff; color: #102033 !important; white-space: nowrap; }
+    .portfolio__btn:hover { background: #67b7c8; border-color: #67b7c8; color: #102033 !important; }
+    .portfolio__container .swiper-button-prev, .portfolio__container .swiper-button-next { border: 1px solid rgba(16,32,51,.12); background: rgba(255,255,255,.94); color: #102033; }
+    body.dark-theme .portfolio__content { background: #0f172a; }
+    body.dark-theme .portfolio__content > div { background: linear-gradient(180deg, rgba(15,23,42,.92), #0f172a); }
+    .contact__container { max-width: 880px; border-radius: 1.6rem; background: linear-gradient(135deg, #ffffff 0%, #f9fcfd 58%, #eef8fb 100%); box-shadow: 0 24px 60px rgba(15,23,42,.09); padding: 2.4rem 2.6rem !important; }
+    .contact__container::before { height: 100%; width: .48rem; right: auto; bottom: 0; background: linear-gradient(180deg, #166a82, #67b7c8, #d9a441); }
+    .contact__title { font-size: 1.22rem; color: #102033 !important; }
+    .contact__description { font-size: .94rem; color: #617083 !important; }
+    .progressbar { max-width: 500px; margin-bottom: 1.75rem; }
+    .progress-step { box-shadow: none; }
+    .wizard__choices { max-width: 680px; gap: .7rem; }
+    .wizard__btn { min-height: 3.35rem; border-radius: 999px; border-color: transparent; background: #f1f8fa; box-shadow: none; }
+    .wizard__btn i { border-radius: 999px; background: #ffffff; box-shadow: 0 8px 18px rgba(15,23,42,.06); }
+    .wizard__btn:hover { background: #e5f4f8; box-shadow: none; transform: translateY(-1px); }
+    body.dark-theme .contact__container { background: linear-gradient(135deg, #111827, #0f172a 58%, #0b3144); }
+    .location__container { grid-template-columns: minmax(240px,.82fr) minmax(360px,1.45fr); gap: 1.25rem; }
+    .location__weather { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem 1.5rem; min-height: auto; }
+    .location__weather h3, .location__weather .location__updated { margin: 0; }
+    .location__weather-grid { grid-template-columns: repeat(3, minmax(130px, 1fr)); margin: 0; }
+    .location__panel, .location__map-card { border-radius: 1.45rem; background: linear-gradient(180deg, #ffffff, #f8fcfd); box-shadow: 0 22px 55px rgba(15,23,42,.08); }
+    .location__panel h3, .location__map-card h3 { font-size: 1.2rem; }
+    .location__nz-visual { height: 15.5rem; display: grid; place-items: center; background: radial-gradient(circle at 50% 42%, rgba(103,183,200,.16), transparent 42%), linear-gradient(145deg, #f6fcfe, #e8f6fa); }
+    .location__nz-img { width: min(78%, 12rem); height: 13.5rem; object-fit: contain; opacity: .9; filter: drop-shadow(0 18px 18px rgba(15,23,42,.12)); animation: locationFloat 5s ease-in-out infinite; }
+    .location__pin { top: 5.15rem; left: 7.35rem; animation: markerPulse 2.8s ease-in-out infinite; }
+    .location__map-card { padding: 1.15rem; }
+    .location__map { height: 20rem; border-radius: 1.2rem; }
+    .location .leaflet-popup-content { margin: .7rem .85rem; font-size: .78rem; line-height: 1.35; }
+    .location .leaflet-popup-content strong { font-size: .8rem; }
+    .location .leaflet-container { font: 11px/1.4 var(--body-font); }
+    .location .leaflet-control-zoom a { width: 1.75rem; height: 1.75rem; line-height: 1.75rem; font-size: 1rem; }
+    body.dark-theme .location__panel, body.dark-theme .location__map-card { background: linear-gradient(180deg, #111827, #0f172a); }
+    body.dark-theme .location__nz-visual { background: radial-gradient(circle at 50% 42%, rgba(125,211,252,.14), transparent 42%), rgba(30,41,59,.56); }
     @media screen and (max-width: 767px) {
         .nav__menu { left: 50%; right: auto; bottom: -110%; width: min(94vw,28rem); max-height: 72vh; overflow-y: auto; padding: 3.25rem 1.25rem 2rem; border-radius: 1.25rem 1.25rem 0 0; box-shadow: 0 -18px 42px rgba(15,23,42,.16); transform: translateX(-50%); }
         .nav__menu.show-menu { bottom: 0; }
@@ -129,12 +177,15 @@ styles.textContent = `
         .wizard__choices { grid-template-columns: 1fr; width: min(100%,22rem); max-width: 22rem; gap: .75rem; padding: 1rem 0 0; margin-top: 1.25rem; }
         .wizard__btn { width: 100%; min-height: 3.55rem; justify-content: flex-start; padding: .75rem .85rem; white-space: normal; text-align: left; }
         .portfolio__container { padding: .5rem .95rem 3.75rem; }
-        .portfolio__content { grid-template-columns: 1fr; gap: 1rem; min-height: auto; padding: 1rem; border-radius: 1.35rem; }
-        .portfolio__content::before, .portfolio__content::after { display: none; }
-        .portfolio__content > div { order: 2; } .portfolio__img { order: 1; width: 100%; height: 220px; margin: 0; border-radius: 1rem; transform: none; }
+        .portfolio__content { grid-template-columns: 1fr; gap: 0; min-height: auto; padding: 0; border-radius: 1.25rem; }
+        .portfolio__content::after { display: none; }
+        .portfolio__content > div { grid-template-columns: 1fr; order: 2; padding: 1.25rem; } .portfolio__img { order: 1; width: 100%; height: 220px; margin: 0; border-radius: 0; transform: none; }
+        .portfolio__btn { grid-column: auto; grid-row: auto; width: fit-content; }
         .portfolio__title { font-size: 1.75rem; } .portfolio__description { font-size: .9rem; line-height: 1.6; }
         .portfolio__container .swiper-button-prev, .portfolio__container .swiper-button-next { display: none; }
         .location__container { grid-template-columns: 1fr; } .location__panel, .location__map-card { min-height: auto; } .location__map { height: 18rem; }
+        .location__weather { grid-template-columns: 1fr; }
+        .location__weather-grid { grid-template-columns: 1fr; }
         .tour-swiper .swiper-pagination { right: .85rem !important; padding: .5rem .34rem; }
     }
 `;
@@ -192,15 +243,10 @@ function ensureLocationSection() {
                 <span class="location__eyebrow">Residing Place</span>
                 <h3>New Zealand</h3>
                 <div class="location__nz-visual" aria-hidden="true">
-                    <svg class="location__nz-svg" viewBox="0 0 220 180" role="presentation">
-                        <defs><linearGradient id="nzLandGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7dd3fc" /><stop offset="58%" stop-color="#1f9fbd" /><stop offset="100%" stop-color="#116a82" /></linearGradient></defs>
-                        <path class="location__nz-route" d="M126 44 C112 62 110 78 103 92 C96 108 79 124 70 144" />
-                        <path class="location__nz-land" d="M135 20 C154 25 164 38 162 55 C160 70 147 73 143 87 C139 103 151 111 145 124 C139 138 116 132 110 117 C105 103 114 94 116 81 C118 69 105 63 111 47 C115 35 123 24 135 20 Z" />
-                        <path class="location__nz-land" d="M82 73 C96 82 101 99 93 116 C85 133 71 149 56 164 C43 177 28 169 33 151 C38 132 52 121 54 104 C56 88 66 69 82 73 Z" />
-                        <path class="location__nz-land" d="M165 88 C178 91 187 101 185 113 C183 124 169 129 159 121 C150 114 151 98 165 88 Z" opacity=".82" />
-                    </svg>
+                    <img class="location__nz-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/New%20Zealand%20location%20map.svg" alt="Map of New Zealand">
                     <span class="location__pin"></span>
                 </div>
+                <span class="location__map-credit">Map source: Wikimedia Commons</span>
                 <p>Currently based around Pukekohe in the Auckland Region, working with data, BI, and modern development tools.</p>
             </article>
             <article class="location__map-card">
