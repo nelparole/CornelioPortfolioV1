@@ -1,53 +1,57 @@
-/*==================== MENU SHOW Y HIDDEN ====================*/
-const navMenu = document.getElementById('nav-menu'),
-    navToggle = document.getElementById('nav-toggle'),
-    navClose = document.getElementById('nav-close');
+/*==================== MENU ====================*/
+const navMenu = document.getElementById('nav-menu');
+const navToggle = document.getElementById('nav-toggle');
+const navClose = document.getElementById('nav-close');
 
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu');
-    });
-}
-if (navClose) {
-    navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu');
-    });
-}
+if (navToggle) navToggle.addEventListener('click', () => navMenu?.classList.add('show-menu'));
+if (navClose) navClose.addEventListener('click', () => navMenu?.classList.remove('show-menu'));
 
-const navLink = document.querySelectorAll('.nav__link');
 function linkAction() {
-    const navMenu = document.getElementById('nav-menu');
-    navMenu.classList.remove('show-menu');
+    document.getElementById('nav-menu')?.classList.remove('show-menu');
 }
-navLink.forEach(n => n.addEventListener('click', linkAction));
 
-/*==================== ACCORDION SKILLS ====================*/
-const skillsContent = document.getElementsByClassName('skills__content'),
-    skillsHeader = document.querySelectorAll('.skills__header');
+document.querySelectorAll('.nav__link').forEach((link) => link.addEventListener('click', linkAction));
+
+/*==================== SKILLS ACCORDION ====================*/
+const skillsContent = document.getElementsByClassName('skills__content');
+const skillsHeader = document.querySelectorAll('.skills__header');
 
 function toggleSkills() {
-    let itemClass = this.parentNode.className;
-    for (let i = 0; i < skillsContent.length; i++) {
+    const itemClass = this.parentNode.className;
+    for (let i = 0; i < skillsContent.length; i += 1) {
         skillsContent[i].className = 'skills__content skills__close';
     }
     if (itemClass === 'skills__content skills__close') {
         this.parentNode.className = 'skills__content skills__open';
     }
 }
-skillsHeader.forEach((el) => {
-    el.addEventListener('click', toggleSkills);
-});
 
-/*==================== PROFILE CONTENT UPDATES ====================*/
-const aboutDescription = document.querySelector('.about__description');
-const aboutInfoTitles = document.querySelectorAll('.about__info-title');
-const aboutInfoNames = document.querySelectorAll('.about__info-name');
-const skillsSectionTitles = document.querySelectorAll('.skills__content .skills__titles');
-const homeDescription = document.querySelector('.home__description');
-const homeData = document.querySelector('.home__data');
+skillsHeader.forEach((header) => header.addEventListener('click', toggleSkills));
 
-const portfolioEnhancementStyles = document.createElement('style');
-portfolioEnhancementStyles.textContent = `
+/*==================== VISUAL REFINEMENTS ====================*/
+const enhancementStyles = document.createElement('style');
+enhancementStyles.textContent = `
+    body:not(.dark-theme) {
+        --portfolio-ink: #172033;
+        --portfolio-muted: #667085;
+        --portfolio-accent: #177b98;
+        --portfolio-line: #e2e8f0;
+        color: var(--portfolio-muted);
+    }
+
+    body:not(.dark-theme) .home__title,
+    body:not(.dark-theme) .qualification__title,
+    body:not(.dark-theme) .portfolio__tech strong {
+        color: var(--portfolio-ink);
+    }
+
+    body:not(.dark-theme) .home__subtitle,
+    body:not(.dark-theme) .home__description,
+    body:not(.dark-theme) .skills__subtitle,
+    body:not(.dark-theme) .section__subtitle {
+        color: var(--portfolio-muted);
+    }
+
     .home__focus {
         display: flex;
         flex-wrap: wrap;
@@ -66,56 +70,8 @@ portfolioEnhancementStyles.textContent = `
         background: rgba(23, 123, 152, .07);
     }
 
-    body:not(.dark-theme) {
-        --portfolio-ink: #172033;
-        --portfolio-muted: #667085;
-        --portfolio-accent: #177b98;
-        --portfolio-line: #e2e8f0;
-        color: var(--portfolio-muted);
-    }
-
-    body:not(.dark-theme) .home__title,
-    body:not(.dark-theme) .about__info-title,
-    body:not(.dark-theme) .qualification__title,
-    body:not(.dark-theme) .portfolio__tech strong {
-        color: var(--portfolio-ink);
-    }
-
-    body:not(.dark-theme) .home__subtitle,
-    body:not(.dark-theme) .home__description,
-    body:not(.dark-theme) .about__description,
-    body:not(.dark-theme) .skills__subtitle,
-    body:not(.dark-theme) .portfolio__description,
-    body:not(.dark-theme) .section__subtitle {
-        color: var(--portfolio-muted);
-    }
-
-    body:not(.dark-theme) .skills__header .skills__titles,
-    body:not(.dark-theme) .skills__icon,
-    body:not(.dark-theme) .portfolio__title,
-    body:not(.dark-theme) .portfolio__tech-chip,
-    body:not(.dark-theme) .portfolio__btn {
-        color: var(--portfolio-accent);
-    }
-
-    body:not(.dark-theme) .about.section .section__title,
-    body:not(.dark-theme) .about.section .about__info-title {
-        color: #f8fbff !important;
-    }
-
-    body:not(.dark-theme) .about.section .about__description {
-        color: rgba(226, 232, 240, .9);
-    }
-
-    body:not(.dark-theme) .about.section .about__info-name {
-        color: rgba(255, 255, 255, .92);
-    }
-
-    body:not(.dark-theme) .about.section .section__title::after {
-        background: linear-gradient(90deg, rgba(23, 123, 152, .95), rgba(125, 211, 252, .6));
-    }
-
-    body:not(.dark-theme) .header {
+    body:not(.dark-theme) .header,
+    body.dark-theme .header {
         transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
     }
 
@@ -125,14 +81,22 @@ portfolioEnhancementStyles.textContent = `
         backdrop-filter: blur(14px);
     }
 
-    body:not(.dark-theme) .nav__link {
+    body.dark-theme .scroll-header {
+        background: rgba(16, 23, 38, .86);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, .28);
+        backdrop-filter: blur(14px);
+    }
+
+    body:not(.dark-theme) .nav__link,
+    body.dark-theme .nav__link {
         border-radius: 999px;
         padding: .45rem .75rem;
         position: relative;
         transition: color .25s ease, background .25s ease, transform .25s ease;
     }
 
-    body:not(.dark-theme) .nav__link::after {
+    body:not(.dark-theme) .nav__link::after,
+    body.dark-theme .nav__link::after {
         content: '';
         position: absolute;
         left: 50%;
@@ -140,10 +104,17 @@ portfolioEnhancementStyles.textContent = `
         width: 1.15rem;
         height: 2px;
         border-radius: 999px;
-        background: var(--first-color);
         opacity: 0;
         transform: translateX(-50%) scaleX(.35);
         transition: opacity .25s ease, transform .25s ease;
+    }
+
+    body:not(.dark-theme) .nav__link::after {
+        background: var(--first-color);
+    }
+
+    body.dark-theme .nav__link::after {
+        background: #38bdf8;
     }
 
     body:not(.dark-theme) .nav__link:hover {
@@ -152,14 +123,16 @@ portfolioEnhancementStyles.textContent = `
         transform: translateY(-2px);
     }
 
-    body:not(.dark-theme) .nav__link:hover::after,
-    body:not(.dark-theme) .nav__link.active-link::after {
-        opacity: 1;
-        transform: translateX(-50%) scaleX(1);
+    body.dark-theme .nav__link:hover {
+        color: #e8f7ff;
+        background: rgba(56, 189, 248, .12);
+        transform: translateY(-2px);
     }
 
-    .section {
-        position: relative;
+    .nav__link:hover::after,
+    .nav__link.active-link::after {
+        opacity: 1 !important;
+        transform: translateX(-50%) scaleX(1) !important;
     }
 
     .section__title {
@@ -202,6 +175,29 @@ portfolioEnhancementStyles.textContent = `
         margin: 0 .65rem;
     }
 
+    .about.section .section__title,
+    .about.section .about__info-title,
+    .about.section .about__info-name {
+        color: #ffffff !important;
+    }
+
+    .about.section .about__description {
+        color: #e8eef8 !important;
+    }
+
+    .about.section .section__title::after {
+        background: linear-gradient(90deg, #38bdf8, rgba(56, 189, 248, .28));
+    }
+
+    body.dark-theme .section__title {
+        color: #f8fbff !important;
+    }
+
+    body.dark-theme .section__subtitle,
+    body.dark-theme .skills__subtitle {
+        color: #cbd5e1 !important;
+    }
+
     .skills__container {
         align-items: start;
         column-gap: 4rem;
@@ -232,10 +228,6 @@ portfolioEnhancementStyles.textContent = `
         min-width: 1.65rem;
     }
 
-    .skills__arrow {
-        font-size: 1.35rem;
-    }
-
     .skills__subtitle {
         display: block;
         line-height: 1.45;
@@ -245,10 +237,6 @@ portfolioEnhancementStyles.textContent = `
     .skills__list {
         padding-left: 2.65rem;
         row-gap: .95rem;
-    }
-
-    .skills__titles {
-        margin-bottom: .35rem;
     }
 
     .skills__name {
@@ -269,6 +257,24 @@ portfolioEnhancementStyles.textContent = `
         overflow: hidden;
     }
 
+    body.dark-theme .skills__header .skills__titles,
+    body.dark-theme .skills__name,
+    body.dark-theme .skills__icon {
+        color: #38bdf8 !important;
+    }
+
+    body.dark-theme .skills__number {
+        color: #e5edf8 !important;
+    }
+
+    body.dark-theme .skills__bar {
+        background: rgba(148, 163, 184, .28);
+    }
+
+    body.dark-theme .skills__percentage {
+        background: linear-gradient(90deg, #38bdf8, #a5b4fc);
+    }
+
     .portfolio {
         overflow: hidden;
     }
@@ -277,10 +283,6 @@ portfolioEnhancementStyles.textContent = `
         max-width: 1120px;
         padding: 1.5rem 5rem 5.25rem;
         overflow: visible;
-    }
-
-    .portfolio__container .swiper-wrapper {
-        align-items: stretch;
     }
 
     .portfolio__container .swiper-slide {
@@ -324,7 +326,6 @@ portfolioEnhancementStyles.textContent = `
         right: -4.25rem;
         top: 4.75rem;
         background: linear-gradient(145deg, rgba(232, 249, 243, .96), rgba(59, 213, 133, .82));
-        transform: rotate(1.5deg);
     }
 
     .portfolio__content::after {
@@ -333,7 +334,6 @@ portfolioEnhancementStyles.textContent = `
         right: -1.75rem;
         bottom: -2.75rem;
         background: linear-gradient(145deg, rgba(255, 241, 219, .98), rgba(247, 181, 98, .82));
-        transform: rotate(2.5deg);
     }
 
     .portfolio__content > div {
@@ -342,7 +342,6 @@ portfolioEnhancementStyles.textContent = `
         justify-content: center;
         min-width: 0;
         max-width: 34rem;
-        padding: .5rem 0;
         order: 1;
         z-index: 1;
     }
@@ -483,7 +482,6 @@ portfolioEnhancementStyles.textContent = `
         opacity: .34;
         border-radius: 999px;
         background: var(--portfolio-accent, #177b98);
-        transition: width .25s ease, opacity .25s ease, background .25s ease;
     }
 
     .portfolio .swiper-pagination-bullet-active {
@@ -528,7 +526,6 @@ portfolioEnhancementStyles.textContent = `
         opacity: 1 !important;
         visibility: visible !important;
         box-shadow: 0 0 0 2px rgba(15, 23, 42, .16);
-        transition: width .25s ease, height .25s ease, background .25s ease, transform .25s ease;
     }
 
     .tour-swiper .swiper-pagination-bullet-active {
@@ -537,99 +534,6 @@ portfolioEnhancementStyles.textContent = `
         border-color: #fff;
         background: linear-gradient(180deg, #38bdf8, #177b98);
         box-shadow: 0 0 0 4px rgba(56, 189, 248, .18);
-    }
-
-    body:not(.dark-theme) .about.section .section__title,
-    body:not(.dark-theme) .about.section .about__info-title,
-    body.dark-theme .about.section .section__title,
-    body.dark-theme .about.section .about__info-title {
-        color: #ffffff !important;
-    }
-
-    body:not(.dark-theme) .about.section .about__description,
-    body.dark-theme .about.section .about__description {
-        color: #e8eef8 !important;
-    }
-
-    body:not(.dark-theme) .about.section .about__info-name,
-    body.dark-theme .about.section .about__info-name {
-        color: #ffffff !important;
-    }
-
-    body:not(.dark-theme) .about.section .section__title::after,
-    body.dark-theme .about.section .section__title::after {
-        background: linear-gradient(90deg, #38bdf8, rgba(56, 189, 248, .28));
-    }
-
-    body.dark-theme .header {
-        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
-    }
-
-    body.dark-theme .scroll-header {
-        background: rgba(16, 23, 38, .86);
-        box-shadow: 0 8px 28px rgba(0, 0, 0, .28);
-        backdrop-filter: blur(14px);
-    }
-
-    body.dark-theme .nav__link {
-        border-radius: 999px;
-        padding: .45rem .75rem;
-        position: relative;
-        transition: color .25s ease, background .25s ease, transform .25s ease;
-    }
-
-    body.dark-theme .nav__link::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: .18rem;
-        width: 1.15rem;
-        height: 2px;
-        border-radius: 999px;
-        background: #38bdf8;
-        opacity: 0;
-        transform: translateX(-50%) scaleX(.35);
-        transition: opacity .25s ease, transform .25s ease;
-    }
-
-    body.dark-theme .nav__link:hover {
-        color: #e8f7ff;
-        background: rgba(56, 189, 248, .12);
-        transform: translateY(-2px);
-    }
-
-    body.dark-theme .nav__link:hover::after,
-    body.dark-theme .nav__link.active-link::after {
-        opacity: 1;
-        transform: translateX(-50%) scaleX(1);
-    }
-
-    body.dark-theme .section__title {
-        color: #f8fbff !important;
-    }
-
-    body.dark-theme .section__subtitle,
-    body.dark-theme .skills__subtitle {
-        color: #cbd5e1 !important;
-    }
-
-    body.dark-theme .skills__header .skills__titles,
-    body.dark-theme .skills__name,
-    body.dark-theme .skills__icon,
-    body.dark-theme .portfolio__title {
-        color: #38bdf8 !important;
-    }
-
-    body.dark-theme .skills__number {
-        color: #e5edf8 !important;
-    }
-
-    body.dark-theme .skills__bar {
-        background: rgba(148, 163, 184, .28);
-    }
-
-    body.dark-theme .skills__percentage {
-        background: linear-gradient(90deg, #38bdf8, #a5b4fc);
     }
 
     .wizard__choices {
@@ -708,12 +612,6 @@ portfolioEnhancementStyles.textContent = `
         background: #fff;
     }
 
-    .wizard__btn.secondary:hover {
-        border-color: rgba(100, 116, 139, .34);
-        background: #f8fafc;
-        color: var(--portfolio-ink, #172033);
-    }
-
     body.dark-theme .wizard__btn {
         border-color: rgba(148, 163, 184, .18) !important;
         background: rgba(30, 41, 59, .72) !important;
@@ -737,15 +635,198 @@ portfolioEnhancementStyles.textContent = `
         color: #0f172a;
     }
 
-    body.dark-theme .wizard__btn.primary {
-        border-color: #38bdf8 !important;
-        background: #38bdf8 !important;
-        color: #0f172a !important;
+    .location {
+        overflow: hidden;
     }
 
-    body.dark-theme .wizard__btn.secondary {
-        border-color: rgba(148, 163, 184, .22) !important;
-        color: #cbd5e1 !important;
+    .location__container {
+        display: grid;
+        grid-template-columns: minmax(220px, .8fr) minmax(340px, 1.35fr) minmax(240px, .9fr);
+        gap: 1.25rem;
+        align-items: stretch;
+    }
+
+    .location__panel,
+    .location__map-card {
+        position: relative;
+        min-height: 23rem;
+        border: 1px solid rgba(148, 163, 184, .18);
+        border-radius: 1.2rem;
+        background:
+            radial-gradient(circle at 20% 0%, rgba(56, 189, 248, .18), transparent 34%),
+            linear-gradient(145deg, #07152f 0%, #0f2044 48%, #092c48 100%);
+        color: #e8f7ff;
+        box-shadow: 0 24px 58px rgba(15, 23, 42, .18);
+        overflow: hidden;
+    }
+
+    .location__panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.35rem;
+    }
+
+    .location__panel::before,
+    .location__map-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(125, 211, 252, .09) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(125, 211, 252, .09) 1px, transparent 1px);
+        background-size: 32px 32px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, .8), transparent 78%);
+        pointer-events: none;
+    }
+
+    .location__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        border: 1px solid rgba(125, 211, 252, .2);
+        border-radius: 999px;
+        background: rgba(14, 165, 233, .12);
+        color: #7dd3fc;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+        line-height: 1;
+        padding: .45rem .65rem;
+        text-transform: uppercase;
+    }
+
+    .location__panel h3,
+    .location__map-card h3 {
+        color: #fff;
+        font-size: 1.45rem;
+        line-height: 1.2;
+        margin: .85rem 0 .5rem;
+    }
+
+    .location__panel p,
+    .location__updated {
+        color: rgba(226, 232, 240, .78);
+        font-size: .88rem;
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    .location__nz-visual {
+        position: relative;
+        height: 13rem;
+        margin: 1rem 0;
+        border: 1px solid rgba(125, 211, 252, .18);
+        border-radius: 1rem;
+        background:
+            radial-gradient(circle at 58% 34%, rgba(56, 189, 248, .24), transparent 20%),
+            linear-gradient(145deg, rgba(30, 64, 175, .5), rgba(8, 47, 73, .35));
+        overflow: hidden;
+    }
+
+    .location__island {
+        position: absolute;
+        display: block;
+        background: linear-gradient(145deg, #38bdf8, #177b98);
+        box-shadow: 0 18px 28px rgba(8, 47, 73, .34);
+    }
+
+    .location__island--north {
+        width: 4.7rem;
+        height: 7.4rem;
+        top: 1.35rem;
+        left: 8.3rem;
+        border-radius: 60% 35% 58% 42%;
+        transform: rotate(22deg);
+    }
+
+    .location__island--south {
+        width: 4.55rem;
+        height: 8.2rem;
+        left: 4.65rem;
+        bottom: 1rem;
+        border-radius: 42% 58% 35% 65%;
+        transform: rotate(28deg);
+        opacity: .88;
+    }
+
+    .location__pin {
+        position: absolute;
+        top: 4.35rem;
+        left: 10.65rem;
+        width: 1rem;
+        height: 1rem;
+        border: 3px solid #fff;
+        border-radius: 50% 50% 50% 0;
+        background: #ef4444;
+        box-shadow: 0 0 0 .45rem rgba(239, 68, 68, .18);
+        transform: rotate(-45deg);
+        z-index: 2;
+    }
+
+    .location__map-card {
+        padding: 1rem;
+    }
+
+    .location__map-header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: .35rem .35rem 1rem;
+    }
+
+    .location__status {
+        border-radius: 999px;
+        background: rgba(34, 197, 94, .14);
+        color: #bbf7d0;
+        font-size: .78rem;
+        font-weight: 700;
+        line-height: 1;
+        padding: .55rem .7rem;
+    }
+
+    .location__map {
+        position: relative;
+        z-index: 1;
+        height: 18.8rem;
+        border: 3px solid rgba(255, 255, 255, .82);
+        border-radius: 1rem;
+        background: #0f172a;
+        overflow: hidden;
+    }
+
+    .location__map .leaflet-control-attribution {
+        font-size: .62rem;
+    }
+
+    .location__weather-grid {
+        display: grid;
+        gap: .75rem;
+        margin: 1rem 0;
+    }
+
+    .location__weather-card {
+        border: 1px solid rgba(125, 211, 252, .16);
+        border-radius: .9rem;
+        background: rgba(255, 255, 255, .08);
+        padding: .85rem;
+        backdrop-filter: blur(12px);
+    }
+
+    .location__weather-card span {
+        display: block;
+        color: rgba(226, 232, 240, .72);
+        font-size: .76rem;
+        margin-bottom: .3rem;
+    }
+
+    .location__weather-card strong {
+        color: #fff;
+        font-size: 1.45rem;
+        line-height: 1;
     }
 
     @media screen and (max-width: 767px) {
@@ -800,25 +881,6 @@ portfolioEnhancementStyles.textContent = `
             transform: rotate(90deg);
         }
 
-        body.dark-theme .nav__menu {
-            background: rgba(16, 23, 38, .98);
-            box-shadow: 0 -18px 42px rgba(0, 0, 0, .36);
-        }
-
-        body.dark-theme .nav__menu::before {
-            background: rgba(203, 213, 225, .28);
-        }
-
-        body.dark-theme .nav__close {
-            background: rgba(56, 189, 248, .12);
-            color: #e8f7ff;
-        }
-
-        body.dark-theme .nav__close:hover {
-            background: #38bdf8;
-            color: #0f172a;
-        }
-
         .wizard__choices {
             grid-template-columns: 1fr;
             width: min(100%, 22rem);
@@ -835,30 +897,6 @@ portfolioEnhancementStyles.textContent = `
             padding: .75rem .85rem;
             white-space: normal;
             text-align: left;
-        }
-
-        .wizard__btn span {
-            display: block;
-            min-width: 0;
-            line-height: 1.2;
-        }
-    }
-
-    @media screen and (min-width: 600px) and (max-width: 767px) {
-        .wizard__choices {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            width: min(100%, 38rem);
-            max-width: 38rem;
-        }
-    }
-
-    @media screen and (max-width: 767px) {
-        .skills__container {
-            column-gap: 0;
-        }
-
-        .skills__header .skills__titles {
-            font-size: 1.45rem;
         }
 
         .portfolio__container {
@@ -913,8 +951,17 @@ portfolioEnhancementStyles.textContent = `
             display: none;
         }
 
-        .portfolio .swiper-pagination {
-            margin-top: -.75rem;
+        .location__container {
+            grid-template-columns: 1fr;
+        }
+
+        .location__panel,
+        .location__map-card {
+            min-height: auto;
+        }
+
+        .location__map {
+            height: 18rem;
         }
 
         .tour-swiper .swiper-pagination,
@@ -923,19 +970,16 @@ portfolioEnhancementStyles.textContent = `
             right: .85rem !important;
             padding: .5rem .34rem;
         }
-
-        .tour-swiper .swiper-pagination-bullet {
-            width: .62rem;
-            height: .62rem;
-        }
-
-        .tour-swiper .swiper-pagination-bullet-active {
-            width: .62rem;
-            height: 1.65rem;
-        }
     }
 `;
-document.head.appendChild(portfolioEnhancementStyles);
+document.head.appendChild(enhancementStyles);
+
+/*==================== PROFILE CONTENT ====================*/
+const aboutDescription = document.querySelector('.about__description');
+const aboutInfoTitles = document.querySelectorAll('.about__info-title');
+const aboutInfoNames = document.querySelectorAll('.about__info-name');
+const homeDescription = document.querySelector('.home__description');
+const homeData = document.querySelector('.home__data');
 
 if (homeDescription) {
     homeDescription.textContent = 'Data Engineer and BI Developer focused on ETL pipelines, SQL, Power BI, geospatial analytics, and AI-assisted workflows that turn raw data into reliable insights.';
@@ -953,6 +997,14 @@ if (homeData && !document.querySelector('.home__focus')) {
     homeDescription?.after(focus);
 }
 
+if (aboutDescription) {
+    aboutDescription.textContent = "Hi, I'm Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I'm passionate about turning raw data into clear insights and reliable data solutions.";
+}
+
+if (aboutInfoTitles[0]) aboutInfoTitles[0].textContent = '<03';
+if (aboutInfoNames[1]) aboutInfoNames[1].innerHTML = 'Available to Message<br />';
+
+/*==================== CONTACT BUTTONS ====================*/
 const contactChoiceIcons = {
     'Job Opportunity': 'uil-briefcase-alt',
     'Collaboration': 'uil-users-alt',
@@ -962,16 +1014,167 @@ const contactChoiceIcons = {
 
 document.querySelectorAll('#step1 .wizard__btn').forEach((button) => {
     const label = Object.keys(contactChoiceIcons).find((item) => button.textContent.includes(item));
-
-    if (label) {
-        button.innerHTML = `<i class="uil ${contactChoiceIcons[label]}" aria-hidden="true"></i><span>${label}</span>`;
-    }
+    if (label) button.innerHTML = `<i class="uil ${contactChoiceIcons[label]}" aria-hidden="true"></i><span>${label}</span>`;
 });
 
-document.querySelectorAll('.portfolio__tech').forEach((tech) => {
-    if (tech.dataset.enhanced === 'true') {
+/*==================== LOCATION SECTION ====================*/
+function ensureLocationSection() {
+    if (!document.querySelector('.nav__menu a[href="#location"]')) {
+        const navList = document.querySelector('.nav__list');
+        const item = document.createElement('li');
+        item.className = 'nav__items';
+        item.innerHTML = '<a href="#location" class="nav__link"><i class="uil uil-map-marker nav__icon"></i> Location</a>';
+        navList?.appendChild(item);
+        item.querySelector('.nav__link')?.addEventListener('click', linkAction);
+    }
+
+    if (document.getElementById('location')) return;
+
+    const contact = document.getElementById('contact');
+    if (!contact) return;
+
+    const section = document.createElement('section');
+    section.className = 'location section';
+    section.id = 'location';
+    section.innerHTML = `
+        <h2 class="section__title">Location</h2>
+        <span class="section__subtitle">Auckland, New Zealand</span>
+        <div data-aos="fade-up" class="location__container container">
+            <article class="location__panel">
+                <span class="location__eyebrow">Residing Place</span>
+                <h3>New Zealand</h3>
+                <div class="location__nz-visual" aria-hidden="true">
+                    <span class="location__island location__island--north"></span>
+                    <span class="location__island location__island--south"></span>
+                    <span class="location__pin"></span>
+                </div>
+                <p>Currently based around Auckland, working with data, BI, and modern development tools.</p>
+            </article>
+            <article class="location__map-card">
+                <div class="location__map-header">
+                    <div>
+                        <span class="location__eyebrow">Interactive Map</span>
+                        <h3>Auckland Focus</h3>
+                    </div>
+                    <span class="location__status" id="weatherStatus">Live</span>
+                </div>
+                <div id="aucklandMap" class="location__map" role="img" aria-label="Interactive map showing Auckland, New Zealand"></div>
+            </article>
+            <article class="location__panel location__weather">
+                <span class="location__eyebrow">Live Weather</span>
+                <h3>Auckland Now</h3>
+                <div class="location__weather-grid">
+                    <div class="location__weather-card"><span>Temperature</span><strong id="weatherTemp">--</strong></div>
+                    <div class="location__weather-card"><span>Feels Like</span><strong id="weatherFeels">--</strong></div>
+                    <div class="location__weather-card"><span>Wind</span><strong id="weatherWind">--</strong></div>
+                </div>
+                <p class="location__updated" id="weatherUpdated">Updating live Auckland weather...</p>
+            </article>
+        </div>
+    `;
+    contact.insertAdjacentElement('afterend', section);
+}
+
+function loadLeafletResources(callback) {
+    if (typeof L !== 'undefined') {
+        callback();
         return;
     }
+
+    if (!document.querySelector('link[href*="leaflet.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(link);
+    }
+
+    const existingScript = document.querySelector('script[src*="leaflet.js"]');
+    if (existingScript) {
+        existingScript.addEventListener('load', callback, { once: true });
+        return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.onload = callback;
+    document.body.appendChild(script);
+}
+
+function initLocationMap() {
+    const mapEl = document.getElementById('aucklandMap');
+    if (!mapEl || typeof L === 'undefined' || mapEl.dataset.ready === 'true') return;
+
+    const auckland = [-36.8485, 174.7633];
+    const map = L.map(mapEl, { zoomControl: true, scrollWheelZoom: false }).setView(auckland, 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap',
+    }).addTo(map);
+    L.marker(auckland).addTo(map).bindPopup('<strong>Auckland, New Zealand</strong><br>Current residing area').openPopup();
+    mapEl.dataset.ready = 'true';
+    setTimeout(() => map.invalidateSize(), 250);
+}
+
+const weatherCodeLabels = {
+    0: 'Clear sky',
+    1: 'Mainly clear',
+    2: 'Partly cloudy',
+    3: 'Overcast',
+    45: 'Foggy',
+    48: 'Rime fog',
+    51: 'Light drizzle',
+    53: 'Drizzle',
+    55: 'Heavy drizzle',
+    61: 'Light rain',
+    63: 'Rain',
+    65: 'Heavy rain',
+    80: 'Rain showers',
+    95: 'Thunderstorm',
+};
+
+function setText(id, value) {
+    const element = document.getElementById(id);
+    if (element) element.innerHTML = value;
+}
+
+async function updateAucklandWeather() {
+    const status = document.getElementById('weatherStatus');
+    const updated = document.getElementById('weatherUpdated');
+    const endpoint = 'https://api.open-meteo.com/v1/forecast?latitude=-36.8485&longitude=174.7633&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Pacific%2FAuckland';
+
+    try {
+        if (status) status.textContent = 'Updating';
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error('Weather request failed');
+
+        const data = await response.json();
+        const current = data.current || {};
+        const temp = Math.round(current.temperature_2m);
+        const feels = Math.round(current.apparent_temperature);
+        const wind = Math.round(current.wind_speed_10m);
+        const humidity = Math.round(current.relative_humidity_2m);
+        const condition = weatherCodeLabels[current.weather_code] || 'Live conditions';
+        const observed = current.time ? new Date(current.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'now';
+
+        setText('weatherTemp', `${temp}&deg;C`);
+        setText('weatherFeels', `${feels}&deg;C`);
+        setText('weatherWind', `${wind} km/h`);
+        if (updated) updated.textContent = `${condition}. Humidity ${humidity}%. Updated ${observed}.`;
+        if (status) status.textContent = 'Live';
+    } catch (error) {
+        if (updated) updated.textContent = 'Live weather is temporarily unavailable. Please refresh again later.';
+        if (status) status.textContent = 'Offline';
+    }
+}
+
+ensureLocationSection();
+loadLeafletResources(initLocationMap);
+updateAucklandWeather();
+setInterval(updateAucklandWeather, 10 * 60 * 1000);
+
+/*==================== PORTFOLIO ENHANCEMENT ====================*/
+document.querySelectorAll('.portfolio__tech').forEach((tech) => {
+    if (tech.dataset.enhanced === 'true') return;
 
     const strongText = tech.querySelector('strong')?.textContent || 'Tech Used:';
     const techList = tech.textContent
@@ -990,27 +1193,7 @@ document.querySelectorAll('.portfolio__tech').forEach((tech) => {
     tech.dataset.enhanced = 'true';
 });
 
-if (aboutDescription) {
-    aboutDescription.textContent = "Hi, I'm Cornelio Parole III, a data-focused developer with less than 3 years of experience in ETL development, data engineering, analytics, and reporting. I enjoy learning new platforms, improving my skills in SQL, Power BI, Azure Data Factory, KNIME, geospatial mapping, and AI-assisted development, while also building web development projects as a hobby. I'm passionate about turning raw data into clear insights and reliable data solutions.";
-}
-
-if (aboutInfoTitles[0]) {
-    aboutInfoTitles[0].textContent = '<03';
-}
-
-if (aboutInfoNames[1]) {
-    aboutInfoNames[1].innerHTML = 'Available to Message<br />';
-}
-
-skillsSectionTitles.forEach((title) => {
-    if (title.textContent.trim() === 'Data Engineering & ETL') {
-        const subtitle = title.parentElement.querySelector('.skills__subtitle');
-        if (subtitle) {
-            subtitle.textContent = 'Less than 3 years';
-        }
-    }
-});
-
+/*==================== SKILL CONTENT UPDATES ====================*/
 function createSkillData(name, level) {
     const skill = document.createElement('div');
     skill.className = 'skills__data';
@@ -1024,9 +1207,7 @@ function addSkillItem(sectionTitle, name, level) {
         return title && title.textContent.trim() === sectionTitle;
     });
 
-    if (!section || section.querySelector(`[data-skill="${name}"]`)) {
-        return;
-    }
+    if (!section || section.querySelector(`[data-skill="${name}"]`)) return;
 
     const skill = createSkillData(name, level);
     skill.dataset.skill = name;
@@ -1034,15 +1215,10 @@ function addSkillItem(sectionTitle, name, level) {
 }
 
 function addSkillSection({ title, subtitle, icon, skills, column = 'right' }) {
-    const containerSelector = column === 'left'
-        ? '.skills__container > div:first-child'
-        : '.skills__container > div:last-child';
+    const containerSelector = column === 'left' ? '.skills__container > div:first-child' : '.skills__container > div:last-child';
     const container = document.querySelector(containerSelector);
     const exists = Array.from(document.querySelectorAll('.skills__content .skills__titles')).some((heading) => heading.textContent.trim() === title);
-
-    if (!container || exists) {
-        return;
-    }
+    if (!container || exists) return;
 
     const section = document.createElement('div');
     section.className = 'skills__content skills__close';
@@ -1063,6 +1239,13 @@ function addSkillSection({ title, subtitle, icon, skills, column = 'right' }) {
     container.appendChild(section);
     section.querySelector('.skills__header').addEventListener('click', toggleSkills);
 }
+
+document.querySelectorAll('.skills__content .skills__titles').forEach((title) => {
+    if (title.textContent.trim() === 'Data Engineering & ETL') {
+        const subtitle = title.parentElement.querySelector('.skills__subtitle');
+        if (subtitle) subtitle.textContent = 'Less than 3 years';
+    }
+});
 
 addSkillItem('Data Engineering & ETL', 'KNIME Analytics Platform', 70);
 addSkillItem('Business Intelligence & Reporting', 'DAX Measures & Calculations', 75);
@@ -1091,57 +1274,44 @@ addSkillSection({
     ],
 });
 
-/*==================== SKILLS BAR WIDTH ====================*/
 document.querySelectorAll('.skills__data').forEach((skill) => {
     const number = skill.querySelector('.skills__number');
     const percentage = skill.querySelector('.skills__percentage');
-
-    if (number && percentage) {
-        percentage.style.width = number.textContent.trim();
-    }
+    if (number && percentage) percentage.style.width = number.textContent.trim();
 });
 
-/*==================== SERVICES MODAL ====================*/
-const modalViews = document.querySelectorAll('.services__modal'),
-    modalBtns = document.querySelectorAll('.services__button'),
-    modalCloses = document.querySelectorAll('.services__modal-close');
+/*==================== MODALS ====================*/
+const modalViews = document.querySelectorAll('.services__modal');
+const modalBtns = document.querySelectorAll('.services__button');
+const modalCloses = document.querySelectorAll('.services__modal-close');
 
-let modal = function (modalClick) {
-    modalViews[modalClick].classList.add('active-modal');
-};
 modalBtns.forEach((modalBtn, i) => {
-    modalBtn.addEventListener('click', () => {
-        modal(i);
-    });
+    modalBtn.addEventListener('click', () => modalViews[i]?.classList.add('active-modal'));
 });
+
 modalCloses.forEach((modalClose) => {
     modalClose.addEventListener('click', () => {
-        modalViews.forEach((modalView) => {
-            modalView.classList.remove('active-modal');
-        });
+        modalViews.forEach((modalView) => modalView.classList.remove('active-modal'));
     });
 });
 
-/*==================== PORTFOLIO SWIPER ====================*/
+/*==================== SWIPERS ====================*/
 const swiperPortfolio = new Swiper('.portfolio__container', {
-  slidesPerView: 1,
-  loop: false,
-  spaceBetween: 0,
-  centeredSlides: false,
-  navigation: {
-    nextEl: '.portfolio .swiper-button-next',
-    prevEl: '.portfolio .swiper-button-prev',
-  },
-  pagination: {
-    el: '.portfolio .swiper-pagination',
-    clickable: true,
-  },
+    slidesPerView: 1,
+    loop: false,
+    spaceBetween: 0,
+    centeredSlides: false,
+    navigation: {
+        nextEl: '.portfolio .swiper-button-next',
+        prevEl: '.portfolio .swiper-button-prev',
+    },
+    pagination: {
+        el: '.portfolio .swiper-pagination',
+        clickable: true,
+    },
 });
 
-
-
-/*==================== TESTIMONIAL SWIPER ====================*/
-let swiperTestimonial = new Swiper('.testimonial__container', {
+const swiperTestimonial = new Swiper('.testimonial__container', {
     loop: true,
     grabCursor: true,
     spaceBetween: 48,
@@ -1151,58 +1321,61 @@ let swiperTestimonial = new Swiper('.testimonial__container', {
         dynamicBullets: true,
     },
     breakpoints: {
-        568: {
-            slidesPerView: 2,
-        }
-    }
+        568: { slidesPerView: 2 },
+    },
 });
 
-/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+/*==================== SCROLL ====================*/
 const sections = document.querySelectorAll('section[id]');
+
 function scrollActive() {
     const scrollY = window.pageYOffset;
-    sections.forEach(current => {
+    sections.forEach((current) => {
         const sectionHeight = current.offsetHeight;
         const sectionTop = current.offsetTop - 50;
         const sectionId = current.getAttribute('id');
+        const navItem = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+        if (!navItem) return;
+
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link');
+            navItem.classList.add('active-link');
         } else {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link');
+            navItem.classList.remove('active-link');
         }
     });
 }
-window.addEventListener('scroll', scrollActive);
 
-/*==================== CHANGE BACKGROUND HEADER ====================*/
 function scrollHeader() {
     const nav = document.getElementById('header');
-    if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header');
+    if (this.scrollY >= 80) nav?.classList.add('scroll-header');
+    else nav?.classList.remove('scroll-header');
 }
-window.addEventListener('scroll', scrollHeader);
 
-/*==================== SHOW SCROLL UP ====================*/
 function scrollUp() {
-    const scrollUp = document.getElementById('scroll-up');
-    if (this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll');
+    const scrollUpButton = document.getElementById('scroll-up');
+    if (this.scrollY >= 560) scrollUpButton?.classList.add('show-scroll');
+    else scrollUpButton?.classList.remove('show-scroll');
 }
+
+window.addEventListener('scroll', scrollActive);
+window.addEventListener('scroll', scrollHeader);
 window.addEventListener('scroll', scrollUp);
 
-/*==================== DARK LIGHT THEME ====================*/ 
+/*==================== DARK LIGHT THEME ====================*/
 const themeButton = document.getElementById('theme-button');
 const darkTheme = 'dark-theme';
 const iconTheme = 'uil-sun';
 const selectedTheme = localStorage.getItem('selected-theme');
 const selectedIcon = localStorage.getItem('selected-icon');
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
+const getCurrentIcon = () => themeButton?.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
 
 if (selectedTheme) {
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
-    themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
+    themeButton?.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
 }
 
-themeButton.addEventListener('click', () => {
+themeButton?.addEventListener('click', () => {
     document.body.classList.toggle(darkTheme);
     themeButton.classList.toggle(iconTheme);
     localStorage.setItem('selected-theme', getCurrentTheme());
