@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Mapbox Power BI custom visual mockup showing New York catchment areas and sales points">
+  <defs>
+    <linearGradient id="water" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#dff3fb"/><stop offset="1" stop-color="#bfe7f3"/></linearGradient>
+    <linearGradient id="borough" x1="0" x2="1"><stop stop-color="#1d75b8"/><stop offset="1" stop-color="#69d3df"/></linearGradient>
+    <filter id="soft"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity=".12"/></filter>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0v34" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="900" height="600" fill="url(#water)"/>
+  <path d="M0 36c96-12 187 6 282 7 80 0 159-18 237-34 145-29 257 4 381 28v94c-105-17-213-21-315 2-111 25-207 69-326 56C159 178 81 112 0 124Z" fill="#f5f7f5" opacity=".88"/>
+  <path d="M0 484c106-42 213-61 326-44 122 18 235 74 363 61 72-7 139-32 211-53v152H0Z" fill="#f5f7f5" opacity=".78"/>
+  <g filter="url(#soft)">
+    <path d="M54 133 253 42l113 60-28 104 49 62-95 103-155-23-66-92Z" fill="url(#borough)" opacity=".95"/>
+    <path d="M354 110c119-31 216-4 277 70 39 48 58 107 49 181-77 33-170 40-262 8-78-27-130-79-155-141 24-55 50-94 91-118Z" fill="url(#borough)" opacity=".82"/>
+    <path d="M174 368c112-16 189 5 248 60 44 41 78 86 109 140-128 24-281 8-416-40-48-17-88-39-115-64 45-48 102-82 174-96Z" fill="url(#borough)" opacity=".72"/>
+    <path d="M530 362c110-46 227-45 370-3v180c-137 5-259 0-370 29-31-54-61-96-105-139 28-25 62-47 105-67Z" fill="url(#borough)" opacity=".7"/>
+  </g>
+  <g opacity=".68"><path d="M54 133 253 42l113 60-28 104 49 62-95 103-155-23-66-92Z" fill="url(#grid)"/><path d="M354 110c119-31 216-4 277 70 39 48 58 107 49 181-77 33-170 40-262 8-78-27-130-79-155-141 24-55 50-94 91-118Z" fill="url(#grid)"/><path d="M174 368c112-16 189 5 248 60 44 41 78 86 109 140-128 24-281 8-416-40-48-17-88-39-115-64 45-48 102-82 174-96Z" fill="url(#grid)"/><path d="M530 362c110-46 227-45 370-3v180c-137 5-259 0-370 29-31-54-61-96-105-139 28-25 62-47 105-67Z" fill="url(#grid)"/></g>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="3"><path d="M89 226c71-29 141-49 231-48M146 319c73-24 143-47 199-101M380 178c74 19 147 49 215 108M468 116c22 73 44 146 62 231M78 467c86 3 173 16 253 50M548 408c82 4 170 25 258 60M641 360c20 57 41 105 76 162"/></g>
+  <g font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#102033" opacity=".88"><text x="139" y="239">Manhattan</text><text x="333" y="162">The Bronx</text><text x="188" y="486">Brooklyn</text><text x="562" y="331">Queens</text></g>
+  <g fill="#ff7b55" stroke="#ffffff" stroke-width="5" filter="url(#soft)"><circle cx="164" cy="180" r="15"/><circle cx="270" cy="137" r="15"/><circle cx="407" cy="100" r="15"/><circle cx="540" cy="190" r="16"/><circle cx="644" cy="292" r="15"/><circle cx="724" cy="376" r="15"/><circle cx="219" cy="436" r="16"/><circle cx="315" cy="516" r="16"/><circle cx="94" cy="391" r="15"/><circle cx="464" cy="397" r="17"/><circle cx="778" cy="294" r="14"/></g>
+  <g font-family="Arial, sans-serif" fill="#2e6385" font-size="22" font-style="italic" opacity=".85"><text x="44" y="264">Hudson River</text><text x="236" y="331">East River</text><text x="492" y="540">Jamaica Bay</text><text x="750" y="80">Long Island</text><text x="777" y="108">Sound</text></g>
+</svg>
