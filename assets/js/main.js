@@ -1,6 +1,7 @@
 (() => {
   const legacyScript = 'https://cdn.jsdelivr.net/gh/nelparole/CornelioPortfolioV1@0a9456e8f83e935ef8ed304e8cda3d65c1f7f5da/assets/js/main.js';
   const mapboxImage = 'assets/img/mapbox-powerbi-visual.jpg';
+  let applying = false;
 
   function mapboxSlideHtml() {
     return `<div class="portfolio__content">
@@ -15,41 +16,62 @@
     </div>`;
   }
 
+  function findMapboxSlide(wrapper) {
+    return document.querySelector('[data-project="mapbox-powerbi"]') ||
+      Array.from(wrapper.children).find((slide) => /Mapbox Power BI/i.test(slide.textContent || ''));
+  }
+
   function applyMapboxSlide() {
+    if (applying) return false;
     const wrapper = document.querySelector('#portfolio .swiper-wrapper');
     if (!wrapper) return false;
-    let slide = document.querySelector('[data-project="mapbox-powerbi"]');
+
+    applying = true;
+    let slide = findMapboxSlide(wrapper);
     if (!slide) {
       slide = document.createElement('div');
       slide.className = 'swiper-slide';
-      slide.dataset.project = 'mapbox-powerbi';
       wrapper.insertBefore(slide, wrapper.firstElementChild);
     }
-    slide.innerHTML = mapboxSlideHtml();
+
+    slide.classList.add('swiper-slide');
+    slide.dataset.project = 'mapbox-powerbi';
+    if (!slide.innerHTML.includes('Mapbox Power BI Custom Visual') || !slide.innerHTML.includes(mapboxImage)) {
+      slide.innerHTML = mapboxSlideHtml();
+    }
     if (wrapper.firstElementChild !== slide) wrapper.insertBefore(slide, wrapper.firstElementChild);
+
     const swiper = document.querySelector('.portfolio__container')?.swiper;
     if (swiper) {
       swiper.update();
       swiper.pagination?.render?.();
       swiper.pagination?.update?.();
-      swiper.slideTo(0, 0);
+      if (swiper.activeIndex !== 0) swiper.slideTo(0, 0);
     }
+    applying = false;
     return true;
+  }
+
+  function keepMapboxSlideUpdated() {
+    let attempts = 0;
+    const timer = setInterval(() => {
+      applyMapboxSlide();
+      attempts += 1;
+      if (attempts >= 60) clearInterval(timer);
+    }, 500);
+
+    const root = document.querySelector('#portfolio');
+    if (root) {
+      const observer = new MutationObserver(() => applyMapboxSlide());
+      observer.observe(root, { childList: true, subtree: true });
+    }
   }
 
   function loadLegacy() {
     const script = document.createElement('script');
     script.src = legacyScript;
     script.async = false;
-    script.onload = () => {
-      let attempts = 0;
-      const timer = setInterval(() => {
-        applyMapboxSlide();
-        attempts += 1;
-        if (attempts >= 18) clearInterval(timer);
-      }, 350);
-      setTimeout(applyMapboxSlide, 6500);
-    };
+    script.onload = keepMapboxSlideUpdated;
     document.head.appendChild(script);
   }
 
