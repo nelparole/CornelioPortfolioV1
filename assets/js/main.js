@@ -2,6 +2,7 @@
   const legacyScript = 'https://cdn.jsdelivr.net/gh/nelparole/CornelioPortfolioV1@0a9456e8f83e935ef8ed304e8cda3d65c1f7f5da/assets/js/main.js';
   const mapboxImage = 'assets/img/mapbox-powerbi-visual.jpg';
   let applying = false;
+  let observerStarted = false;
 
   function mapboxSlideHtml() {
     return `<div class="portfolio__content">
@@ -57,21 +58,29 @@
     const timer = setInterval(() => {
       applyMapboxSlide();
       attempts += 1;
-      if (attempts >= 60) clearInterval(timer);
-    }, 500);
+      if (attempts >= 80) clearInterval(timer);
+    }, 300);
 
+    if (observerStarted) return;
     const root = document.querySelector('#portfolio');
     if (root) {
+      observerStarted = true;
       const observer = new MutationObserver(() => applyMapboxSlide());
       observer.observe(root, { childList: true, subtree: true });
     }
   }
 
   function loadLegacy() {
+    applyMapboxSlide();
+    keepMapboxSlideUpdated();
+
     const script = document.createElement('script');
     script.src = legacyScript;
-    script.async = false;
-    script.onload = keepMapboxSlideUpdated;
+    script.async = true;
+    script.onload = () => {
+      applyMapboxSlide();
+      keepMapboxSlideUpdated();
+    };
     document.head.appendChild(script);
   }
 
